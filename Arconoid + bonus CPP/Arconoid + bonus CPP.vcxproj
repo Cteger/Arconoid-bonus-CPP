@@ -19,25 +19,25 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Ball.cpp" />
-    <ClCompile Include="Bloks.cpp" />
-    <ClCompile Include="Bonus.cpp" />
-    <ClCompile Include="Fire_Ball.cpp" />
+    <ClCompile Include="ballClass.cpp" />
+    <ClCompile Include="BallClone.cpp" />
+    <ClCompile Include="blokClass.cpp" />
+    <ClCompile Include="bonusClass.cpp" />
     <ClCompile Include="Header.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="New_HP.cpp" />
-    <ClCompile Include="Racket.cpp" />
-    <ClCompile Include="Little_Big_Racket.cpp" />
+    <ClCompile Include="physClass.cpp" />
+    <ClCompile Include="racketClass.cpp" />
+    <ClCompile Include="windowClass.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Ball.h" />
-    <ClInclude Include="Bloks.h" />
-    <ClInclude Include="Bonus.h" />
-    <ClInclude Include="Fire_Ball.h" />
+    <ClInclude Include="ballClass.h" />
+    <ClInclude Include="BallClone.h" />
+    <ClInclude Include="blokClass.h" />
+    <ClInclude Include="bonusClass.h" />
     <ClInclude Include="Header.h" />
-    <ClInclude Include="New_HP.h" />
-    <ClInclude Include="Racket.h" />
-    <ClInclude Include="Little_Big_Racket.h" />
+    <ClInclude Include="physClass.h" />
+    <ClInclude Include="racketClass.h" />
+    <ClInclude Include="windowClass.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

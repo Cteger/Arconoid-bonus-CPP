@@ -1,6 +1,6 @@
 #pragma once
-#include "Header.h"
-#include "physClass.h"
+#include "gameClass.h"
+#include "physObjectClass.h"
 
 struct Ball: public PhysObject
 {
@@ -11,13 +11,24 @@ private:
 
 public:
 
-	void setLaunchFlag(int i);
+	Ball();
+	Ball(double racketPosx, double racketPosy, double racketSizex);
 
-	int getLaunchFlag();
-	
-	void setMaxSpeed(double i);
+	void BallInitialise(double racketPosx, double racketPosy, double racketSizex);
+	void BallLaunch(int deltaRacketSpeed);
 
-	double getMaxSpeed();
+	bool RenderBall(double racketPosx, double racketPosy, double racketSizex);
+	void DrawBall();
+
+	void MenuColision(int menuSize, int windSizex, int windSizey); // menusize ----
+	void RacketColision(int racketPosx, int racketPosy, int racketSizex, int deltaRacketSpeed);
+	bool BlokColision(int blokPosx, int blokPosy, int blokSizex, int blokSizey);
+
+	void FireBallInitialise();
+	void ReleaseFireBall();
+
+
+	int getFireBallFlag();
 };
 
 

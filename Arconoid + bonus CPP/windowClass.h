@@ -1,6 +1,6 @@
 #pragma once
 
-#include "physClass.h"
+#include "physObjectClass.h"
 #include "ballCLass.h"
 #include "racketClass.h"
 #include "blokClass.h"
@@ -8,60 +8,47 @@
 
 #include <vector>
 
-class Window: public PhysObject
+class Window: public PhysObject//, public Bonus
 {
 private:
-	float buffer[10];
-	int count;
-	int blockCount;
-	int ballCount;
 	int hp;
 	int level;
 	int menuSize;
 	int score;
 
+	std::vector<Bonus*> bonus;
+	std::vector<Blok*> bloks;
+
+public:
 	Ball ball;
 	Racket racket;
 
-	std::vector<Bonus*> bonus;
-	std::vector<Blok*> bloks;
-public:
-	
-	void CreateLevel();
+	Window();
+	Window(int windMenuSize, int newHp, int newLevel, int windSizex, int windSizey, int windPosx, int windPosy);
+
+	void ChooseLevel();
+	void CreateLvlOne();
+	void CreateLvlTwo();
+	void BlokDestroy(int i);
 	void DrawBloks();
 
-	void RacketInitialise();
-	void DrawRacket();
+	void CheckBallColision();
 
-	void BallInitialise();
-	void CheckBall();
-	void DrawBall();
-
-	void BonusInitialise(int bonus_i, int blok_i);
-	void CheckBonus(int bonus_i);
+	void BonusInitialise(int blok_i);
+	void RenderBonus();
 	void BonusCatch(int bonus_i);
 	void BonusDestroy(int bonus_i);
 	void DrawBonus();
 
-
-	void RenderBall();
-	void RenderBonus();
+	void NewHP();
+	void DrawHP();
 
 	void setMenuSize(int wind_menuSize);
 	void setLevel(int wind_level);
 	void setHp(int wind_hp);
-	void setBonusCount(int i);
-	void setCount(int i);
-	void setScore(int i);
 
-	int getCount();
-	int getBlockCount();
-	int getBonusCount();
-	int getBallCount();
 	int getHp();
 	int getLevel();
-	int getMenuSize();
 	int getScore();
-
-	void DrawHP();
+	int getBlokSize();
 };

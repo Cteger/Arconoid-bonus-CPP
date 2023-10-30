@@ -20,22 +20,20 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ballClass.cpp" />
-    <ClCompile Include="BallClone.cpp" />
     <ClCompile Include="blokClass.cpp" />
     <ClCompile Include="bonusClass.cpp" />
-    <ClCompile Include="Header.cpp" />
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="physClass.cpp" />
+    <ClCompile Include="gameClass.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="physObjectClass.cpp" />
     <ClCompile Include="racketClass.cpp" />
     <ClCompile Include="windowClass.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ballClass.h" />
-    <ClInclude Include="BallClone.h" />
     <ClInclude Include="blokClass.h" />
     <ClInclude Include="bonusClass.h" />
-    <ClInclude Include="Header.h" />
-    <ClInclude Include="physClass.h" />
+    <ClInclude Include="gameClass.h" />
+    <ClInclude Include="physObjectClass.h" />
     <ClInclude Include="racketClass.h" />
     <ClInclude Include="windowClass.h" />
   </ItemGroup>

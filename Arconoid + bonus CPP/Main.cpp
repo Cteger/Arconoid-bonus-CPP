@@ -1,4 +1,4 @@
-#include "Header.h"
+#include "gameClass.h"
 
 int main(int argc, char** argv)
 {

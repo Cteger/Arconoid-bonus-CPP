@@ -1,7 +1,7 @@
 #pragma once
-#include "Header.h"
-
-#include "physClass.h"
+#include "gameClass.h"
+#include "bonusClass.h"
+#include "physObjectClass.h"
 
 class Bonus : public PhysObject
 {
@@ -9,17 +9,10 @@ private:
 	int type;
 
 public:
+	Bonus(int blokPosx, int blokPosy, int blokSizex, int blokSizey);
 	
-	void setType(int i);
+	int CheckBonus(double racketPosx, double racketPosy, double racketSizex);
+	void DrawBonus();
+
 	int getType();
-
-	void FireBallInitialise(struct Ball*& ball);
-
-	void ReleaseFireBall(struct Ball*& ball);
-
-	void LittleRacketInitialise(struct Racket& racket);
-
-	void BigRacketInitialise(struct Racket& racket);
-
-	void NewHP(int& hp);
 };

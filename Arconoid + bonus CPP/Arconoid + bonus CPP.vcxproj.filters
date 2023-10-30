@@ -13,10 +13,10 @@
     <ClCompile Include="blokClass.cpp">
       <Filter>Файлы ресурсов</Filter>
     </ClCompile>
-    <ClCompile Include="Header.cpp">
+    <ClCompile Include="gameClass.cpp">
       <Filter>Файлы ресурсов</Filter>
     </ClCompile>
-    <ClCompile Include="Main.cpp">
+    <ClCompile Include="main.cpp">
       <Filter>Файлы ресурсов</Filter>
     </ClCompile>
     <ClCompile Include="racketClass.cpp">
@@ -25,10 +25,7 @@
     <ClCompile Include="bonusClass.cpp">
       <Filter>Файлы ресурсов</Filter>
     </ClCompile>
-    <ClCompile Include="BallClone.cpp">
-      <Filter>Файлы ресурсов</Filter>
-    </ClCompile>
-    <ClCompile Include="physClass.cpp">
+    <ClCompile Include="physObjectClass.cpp">
       <Filter>Файлы ресурсов</Filter>
     </ClCompile>
     <ClCompile Include="windowClass.cpp">
@@ -42,7 +39,7 @@
     <ClInclude Include="blokClass.h">
       <Filter>Файлы ресурсов</Filter>
     </ClInclude>
-    <ClInclude Include="Header.h">
+    <ClInclude Include="gameClass.h">
       <Filter>Файлы ресурсов</Filter>
     </ClInclude>
     <ClInclude Include="racketClass.h">
@@ -51,10 +48,7 @@
     <ClInclude Include="bonusClass.h">
       <Filter>Файлы ресурсов</Filter>
     </ClInclude>
-    <ClInclude Include="BallClone.h">
-      <Filter>Файлы ресурсов</Filter>
-    </ClInclude>
-    <ClInclude Include="physClass.h">
+    <ClInclude Include="physObjectClass.h">
       <Filter>Файлы ресурсов</Filter>
     </ClInclude>
     <ClInclude Include="windowClass.h">

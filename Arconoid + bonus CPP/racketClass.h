@@ -1,13 +1,18 @@
 #pragma once
-#include "gameClass.h"
+#include "game.h"
 #include "physObjectClass.h"
+#include "vectorStruct.h"
 
 class Racket: public PhysObject
 {
 private:
-	std::pair<int, int> racketSpeed;
+	dVector racketSpeed;
 
 public:
+
+	Racket();
+
+	Racket(int windSizex);
 
 	void RacketInitialise(int windSizex);
 

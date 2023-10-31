@@ -26,34 +26,26 @@ void Blok::ResetBlokColor()
 {
 	if (strength == 1)
 	{
-		setRColor(0);
-		setGColor(1.0);
-		setBColor(0.0);
+		setColor(0.0, 1.0, 0.0);
 	}
 	else if (strength == 2)
 	{
-		setRColor(1.0);
-		setGColor(1.0);
-		setBColor(0.0);
+		setColor(1.0, 1.0, 0.0);
 	}
 	else if (strength == 3)
 	{
-		setRColor(0.1);
-		setGColor(0.2);
-		setBColor(0.8);
+		setColor(0.1, 0.2, 0.8);
 	}
 	else if (strength == 4)
 	{
-		setRColor(1.0);
-		setGColor(0.5);
-		setBColor(0.5);
+		setColor(1.0, 0.5, 0.5);
 	}
 }
 void Blok::DrawBlok()
 {
 	glBegin(GL_QUADS);
 
-	glColor3f(getRColor(), getGColor(), getBColor());
+	glColor3f(getColor(0), getColor(1), getColor(2));
 
 	glVertex2d(getPosition(0), getPosition(1));
 	glVertex2d(getPosition(0) + getSize(0),	getPosition(1));

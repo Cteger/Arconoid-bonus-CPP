@@ -1,4 +1,4 @@
-#include "gameClass.h"
+#include "game.h"
 #include "windowClass.h"
 
 #include <glut.h>
@@ -20,18 +20,13 @@ void SystemRelease()
 }
 void SystemInitialise(int hp, int next_level_flag, int blockCount, int level)
 {
-	wind.setSize(WINDOW_SIZEX, WINDOW_SIZEY);
-	wind.setPosition(WINDOW_POSITIONX, WINDOW_POSITIONY);
-	wind.setMenuSize(MENU_SIZE);
+	wind = Window();
 
-	wind.setLevel(level);
-	wind.setHp(hp);
-
-
-	wind.racket.RacketInitialise(wind.getSize(0));
+	wind.racket = Racket(wind.getSize(0));
 
 	//wind.ball = new class Ball;
 
+	//wind.ball.~Ball();//????
 	wind.ball = Ball(wind.racket.getPosition(0), wind.racket.getPosition(1), wind.racket.getSize(0));
 
 	if (next_level_flag == 0)
@@ -139,6 +134,7 @@ void EndGame(int win_point)
 		else
 		{
 			wind.setHp(wind.getHp() - 1);
+			wind.BonusRelease();
 			SystemInitialise(wind.getHp(), 1, wind.getBlokSize(), wind.getLevel());
 		}
 	}

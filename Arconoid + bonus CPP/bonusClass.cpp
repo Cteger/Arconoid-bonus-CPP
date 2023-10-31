@@ -3,6 +3,10 @@
 
 #include <glut.h>
 #include <stdlib.h>
+Bonus::Bonus()
+{
+
+}
 
 Bonus::Bonus(int blokPosx, int blokPosy, int blokSizex, int blokSizey)
 {
@@ -13,27 +17,19 @@ Bonus::Bonus(int blokPosx, int blokPosy, int blokSizex, int blokSizey)
 
 	if (type == 1)
 	{
-		setRColor(1.0);
-		setGColor(0.1);
-		setBColor(0.1);
+		setColor(1.0, 0.1, 0.1);
 	}
 	else if (type == 2)
 	{
-		setRColor(0.0);
-		setGColor(0.5);
-		setBColor(1.0);
+		setColor(0.0, 0.5, 1.0);
 	}
 	else if (type == 3)
 	{
-		setRColor(1.0);
-		setGColor(0.5);
-		setBColor(0.0);
+		setColor(1.0, 0.5, 0.0);
 	}
 	else if (type == 4)
 	{
-		setRColor(0.0);
-		setGColor(0.0);
-		setBColor(0.0);
+		setColor(0.0, 0.0, 0.0);
 	}
 
 	setVec(0, (-0.5) * SPEED);
@@ -63,7 +59,7 @@ void Bonus::DrawBonus()
 {
 	glBegin(GL_QUADS);
 
-	glColor3f(getRColor(), getGColor(),	getBColor());
+	glColor3f(getColor(0), getColor(1),	getColor(2));
 
 	glVertex2d(getPosition(0), getPosition(1));
 	glVertex2d(getPosition(0) + getSize(0),	getPosition(1));

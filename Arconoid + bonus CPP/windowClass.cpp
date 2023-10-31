@@ -61,7 +61,7 @@ void Window::BlokDestroy(int i)
 	{
 		if (bloks[i]->getStrength() == 1 || ball.getFireBallFlag() == 1)
 		{
-			if (CHANCE_OF_RANDOM == 1)
+			if (/*CHANCE_OF_RANDOM == */1)
 			{
 				BonusInitialise(i);
 			}
@@ -116,6 +116,7 @@ void Window::RenderBonus()
 {
 	for (int i = 0; i < bonus.size(); i++)
 	{
+		bonus[i]->setPosition(bonus[i]->getPosition(0), bonus[i]->getPosition(1) + bonus[i]->getVec(1));
 		int j = bonus[i]->CheckBonus(racket.getPosition(0), racket.getPosition(1), racket.getSize(0));
 		if (j == 1)
 		{
@@ -125,12 +126,11 @@ void Window::RenderBonus()
 		{
 			BonusCatch(i);
 		}
-
-		if (!bonus.empty())
-		{
-			bonus[i]->setPosition(bonus[i]->getPosition(0), bonus[i]->getPosition(1) + bonus[i]->getVec(1));
-		}
 	}
+}
+void Window::BonusRelease()
+{
+	bonus.clear();
 }
 void Window::BonusCatch(int bonus_i)
 {

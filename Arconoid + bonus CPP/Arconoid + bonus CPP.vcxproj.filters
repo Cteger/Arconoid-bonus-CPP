@@ -13,7 +13,7 @@
     <ClCompile Include="blokClass.cpp">
       <Filter>Файлы ресурсов</Filter>
     </ClCompile>
-    <ClCompile Include="gameClass.cpp">
+    <ClCompile Include="game.cpp">
       <Filter>Файлы ресурсов</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
@@ -31,6 +31,12 @@
     <ClCompile Include="windowClass.cpp">
       <Filter>Файлы ресурсов</Filter>
     </ClCompile>
+    <ClCompile Include="vectorStruct.cpp">
+      <Filter>Файлы ресурсов</Filter>
+    </ClCompile>
+    <ClCompile Include="colorStruct.cpp">
+      <Filter>Файлы ресурсов</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ballClass.h">
@@ -39,7 +45,7 @@
     <ClInclude Include="blokClass.h">
       <Filter>Файлы ресурсов</Filter>
     </ClInclude>
-    <ClInclude Include="gameClass.h">
+    <ClInclude Include="game.h">
       <Filter>Файлы ресурсов</Filter>
     </ClInclude>
     <ClInclude Include="racketClass.h">
@@ -52,6 +58,12 @@
       <Filter>Файлы ресурсов</Filter>
     </ClInclude>
     <ClInclude Include="windowClass.h">
+      <Filter>Файлы ресурсов</Filter>
+    </ClInclude>
+    <ClInclude Include="colorStruct.h">
+      <Filter>Файлы ресурсов</Filter>
+    </ClInclude>
+    <ClInclude Include="vectorStruct.h">
       <Filter>Файлы ресурсов</Filter>
     </ClInclude>
   </ItemGroup>

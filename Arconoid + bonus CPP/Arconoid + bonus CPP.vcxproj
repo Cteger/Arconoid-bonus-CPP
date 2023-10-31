@@ -22,19 +22,23 @@
     <ClCompile Include="ballClass.cpp" />
     <ClCompile Include="blokClass.cpp" />
     <ClCompile Include="bonusClass.cpp" />
-    <ClCompile Include="gameClass.cpp" />
+    <ClCompile Include="colorStruct.cpp" />
+    <ClCompile Include="game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="physObjectClass.cpp" />
     <ClCompile Include="racketClass.cpp" />
+    <ClCompile Include="vectorStruct.cpp" />
     <ClCompile Include="windowClass.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ballClass.h" />
     <ClInclude Include="blokClass.h" />
     <ClInclude Include="bonusClass.h" />
-    <ClInclude Include="gameClass.h" />
+    <ClInclude Include="colorStruct.h" />
+    <ClInclude Include="game.h" />
     <ClInclude Include="physObjectClass.h" />
     <ClInclude Include="racketClass.h" />
+    <ClInclude Include="vectorStruct.h" />
     <ClInclude Include="windowClass.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

@@ -1,5 +1,5 @@
 #pragma once
-#include "gameClass.h"
+#include "game.h"
 
 #include "physObjectClass.h"
 

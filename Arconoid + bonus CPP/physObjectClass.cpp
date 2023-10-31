@@ -1,62 +1,50 @@
 #include "physObjectClass.h"
 
-void PhysObject::setRColor(double i)
+void PhysObject::setColor(double r, double g, double b)
 {
-	red = i;
-}
-void PhysObject::setGColor(double i)
-{
-	green = i;
-}
-void PhysObject::setBColor(double i)
-{
-	blue = i;
+	color.red = r;
+	color.green = g;
+	color.blue = b;
 }
 
-double PhysObject::getRColor()
+double PhysObject::getColor(int i)
 {
-	return red;
-}
-double PhysObject::getGColor()
-{
-	return green;
-}
-double PhysObject::getBColor()
-{
-	return blue;
+	if (i == 0) return color.red;
+	else if (i == 1) return color.green;
+	else return color.blue;
 }
 
 
 void PhysObject::setSize(int x, int y)
 {
-	size.first = x;
-	size.second = y;
+	size.x = x;
+	size.y = y;
 }
 int PhysObject::getSize(int i)
 {
-	if (i == 0)	return size.first;
-	else return size.second;
+	if (i == 0)	return size.x;
+	else return size.y;
 }
 
 
 void PhysObject::setPosition(int x, int y)
 {
-	position.first = x;
-	position.second = y;
+	position.x = x;
+	position.y = y;
 }
 int PhysObject::getPosition(int i)
 {
-	if (i == 0)	return position.first;
-	else return position.second;
+	if (i == 0)	return position.x;
+	else return position.y;
 }
 
 void PhysObject::setVec(double x, double y)
 {
-	vect.first = x;
-	vect.second = y;
+	vect.x = x;
+	vect.y = y;
 }
 double PhysObject::getVec(int i)
 {
-	if (i == 0)	return vect.first;
-	else return vect.second;
+	if (i == 0)	return vect.x;
+	else return vect.y;
 }

@@ -1,25 +1,21 @@
 #pragma once
 
-#include <vector>
+#include "vectorStruct.h"
+#include "colorStruct.h"
 
 class PhysObject
 {
 //protected:
 private:
-	double red, green, blue;//tuple
-	std::pair<int, int> position;
-	std::pair<int, int> size;
-	std::pair<double, double> vect;
+	Color color;//tuple
+	iVector position;
+	iVector size;
+	dVector vect;
 
 public:
 
-	void setRColor(double i);
-	void setGColor(double i);
-	void setBColor(double i);
-
-	double getRColor();
-	double getGColor();
-	double getBColor();
+	void setColor(double r, double g, double b);
+	double getColor(int i);
 
 	void setSize(int x, int y);
 	int getSize(int i);

@@ -1,6 +1,7 @@
 #include "ballClass.h"
 
 #include <windows.h>
+#include <math.h>
 #include <glut.h>
 
 Ball::Ball()
@@ -19,33 +20,32 @@ Ball::Ball(double racketPosx, double racketPosy, double racketSizex)
 
 	fireBallFlag = 0;
 
-	setRColor(0);
-	setGColor(0);
-	setBColor(0);
+	setColor(0.0, 0.0, 0.0);
 }
 
-
-void Ball::BallInitialise(double racketPosx, double racketPosy, double racketSizex)
+Ball::~Ball()
 {
-	setSize(BALL_SIZE_WIDTH, BALL_SIZE_HEIGHT);
-	setPosition(racketPosx + racketSizex / 2 - getSize(0) / 2,
-		racketPosy + getSize(1));
-	launchFlag = 0;
-	setVec(0, SPEED);
-	maxSpeed = SPEED;
 
-	fireBallFlag = 0;
-
-	setRColor(0);
-	setGColor(0);
-	setBColor(0);
 }
+
+//void Ball::BallInitialise(double racketPosx, double racketPosy, double racketSizex)
+//{
+//	setSize(BALL_SIZE_WIDTH, BALL_SIZE_HEIGHT);
+//	setPosition(racketPosx + racketSizex / 2 - getSize(0) / 2,
+//		racketPosy + getSize(1));
+//	launchFlag = 0;
+//	setVec(0, SPEED);
+//	maxSpeed = SPEED;
+//
+//	fireBallFlag = 0;
+//
+//	setColor(0.0, 0.0, 0.0);
+//}
 void Ball::BallLaunch(int deltaRacketSpeed)
 {
 	if (launchFlag == 0)
 	{
-		setVec(deltaRacketSpeed + 1 - maxSpeed / 10,
-			sqrt(maxSpeed * maxSpeed - getVec(0) * getVec(0)));
+		setVec(deltaRacketSpeed + 1 - maxSpeed / 10, sqrt(maxSpeed * maxSpeed - getVec(0) * getVec(0)));
 		launchFlag = 1;
 		glutPostRedisplay();
 	}
@@ -56,7 +56,7 @@ bool Ball::RenderBall(double racketPosx, double racketPosy, double racketSizex)
 {
 	if (launchFlag == 0)
 	{
-		BallInitialise(racketPosx, racketPosy, racketSizex);
+		setPosition(racketPosx + racketSizex / 2 - getSize(0) / 2, racketPosy + getSize(1));
 		return false;
 	}
 	else
@@ -64,11 +64,12 @@ bool Ball::RenderBall(double racketPosx, double racketPosy, double racketSizex)
 		return true;
 	}
 }
+
 void Ball::DrawBall()
 {
 	glBegin(GL_QUADS);
 
-	glColor3f(getRColor(), getGColor(), getBColor());
+	glColor3f(getColor(0), getColor(1), getColor(2));
 
 	glVertex2d(getPosition(0), getPosition(1));
 	glVertex2d(getPosition(0) + getSize(0), getPosition(1));
@@ -160,17 +161,13 @@ void Ball::FireBallInitialise()
 {
 	fireBallFlag = 1;
 
-	setRColor(1);
-	setGColor(0.1);
-	setBColor(0.1);
+	setColor(1, 0.1, 0.1);
 }
 void Ball::ReleaseFireBall()
 {
 	fireBallFlag = 0;
 
-	setRColor(0.0);
-	setGColor(0.0);
-	setBColor(0.0);
+	setColor(0.0, 0.0, 0.0);
 }
 
 

@@ -36,6 +36,7 @@ public:
 
 	void BonusInitialise(int blok_i);
 	void RenderBonus();
+	void BonusRelease();
 	void BonusCatch(int bonus_i);
 	void BonusDestroy(int bonus_i);
 	void DrawBonus();

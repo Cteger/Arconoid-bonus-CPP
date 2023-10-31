@@ -1,5 +1,5 @@
 #pragma once
-#include "gameClass.h"
+#include "game.h"
 #include "physObjectClass.h"
 
 struct Ball: public PhysObject
@@ -13,6 +13,7 @@ public:
 
 	Ball();
 	Ball(double racketPosx, double racketPosy, double racketSizex);
+	~Ball();
 
 	void BallInitialise(double racketPosx, double racketPosy, double racketSizex);
 	void BallLaunch(int deltaRacketSpeed);

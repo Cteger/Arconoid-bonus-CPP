@@ -1,7 +1,12 @@
+#define __CRTDBG_MAP_ALLOC
+
+#include <crtdbg.h>
+#define DEBUG_NEW new(_NORMAL_BLOCK, __FILE__, __LINE__)
+#define new DEBUG_NEW
 #include "game.h"
 
 int main(int argc, char** argv)
 {
 	SystemOpen(argc, argv);
-	SystemInitialise(3, 0, 0, 1);
+	GameInitialize(1, 1);
 }

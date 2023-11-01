@@ -8,9 +8,9 @@ class PhysObject
 //protected:
 private:
 	Color color;//tuple
-	iVector position;
-	iVector size;
-	dVector vect;
+	CustomVec<int> position;
+	CustomVec<int> size;
+	CustomVec<double> vect;
 
 public:
 

@@ -7,14 +7,14 @@ Window::Window()
 
 }
 
-Window::Window(int windMenuSize, int newHp, int newLevel, int windSizex, int windSizey, int windPosx, int windPosy)
+Window::Window(int newHp, int newLevel, int windSizex, int windSizey, int windPosx, int windPosy)
 {
 	setSize(windSizex, windSizey);
 	setPosition(windPosx, windPosy);
-	menuSize = windMenuSize;
 
 	level = newLevel;
 	hp = newHp;
+	score = 0;
 }
 
 void Window::ChooseLevel()
@@ -31,8 +31,11 @@ void Window::ChooseLevel()
 void Window::CreateLvlOne()
 {
 	int blokCount = 15;
+	for (int i = 0; i < bloks.size(); i++)
+	{
+		delete bloks[i];
+	}
 	bloks.clear();
-	//bloks.resize(blockCount);
 
 	for (int i = 0; i < blokCount; i++)
 	{
@@ -43,6 +46,10 @@ void Window::CreateLvlOne()
 void Window::CreateLvlTwo()
 {
 	int blockCount = 120;
+	for (int i = 0; i < bloks.size(); i++)
+	{
+		delete bloks[i];
+	}
 	bloks.clear();
 
 	for (int i = 0; i < blockCount; i++)
@@ -61,12 +68,16 @@ void Window::BlokDestroy(int i)
 	{
 		if (bloks[i]->getStrength() == 1 || ball.getFireBallFlag() == 1)
 		{
-			if (/*CHANCE_OF_RANDOM == */1)
+			if (CHANCE_OF_RANDOM == 1)
 			{
 				BonusInitialise(i);
 			}
 
+			delete bloks[i];
+
 			bloks[i] = bloks[bloks.size() - 1];//!!!!!!!
+
+			//delete bloks[bloks.size() - 1];
 
 			bloks.pop_back();
 
@@ -130,6 +141,11 @@ void Window::RenderBonus()
 }
 void Window::BonusRelease()
 {
+	for (int i = 0; i < bonus.size(); i++)
+	{
+		delete bonus[i];
+	}
+
 	bonus.clear();
 }
 void Window::BonusCatch(int bonus_i)
@@ -157,7 +173,11 @@ void Window::BonusCatch(int bonus_i)
 }
 void Window::BonusDestroy(int bonus_i)
 {
+	delete bonus[bonus_i];
+
 	bonus[bonus_i] = bonus[bonus.size() - 1];
+
+	//delete bonus[bonus.size() - 1];
 
 	bonus.pop_back();
 }
@@ -210,10 +230,6 @@ void Window::DrawHP()
 }
 
 
-void Window::setMenuSize(int wind_menuSize)
-{
-	menuSize = wind_menuSize;
-}
 void Window::setLevel(int wind_level)
 {
 	level = wind_level;
@@ -233,8 +249,4 @@ int Window::getLevel()
 int Window::getScore()
 {
 	return score;
-}
-int Window::getBlokSize()
-{
-	return bloks.size();
 }

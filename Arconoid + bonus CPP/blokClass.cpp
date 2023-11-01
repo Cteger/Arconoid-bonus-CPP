@@ -21,6 +21,11 @@ Blok::Blok(int i, int menuSize, int windSizex, int windSizey, int blokSizey, int
 	ResetBlokColor();
 }
 
+Blok::~Blok()
+{
+
+}
+
 
 void Blok::ResetBlokColor()
 {
@@ -41,6 +46,7 @@ void Blok::ResetBlokColor()
 		setColor(1.0, 0.5, 0.5);
 	}
 }
+
 void Blok::DrawBlok()
 {
 	glBegin(GL_QUADS);

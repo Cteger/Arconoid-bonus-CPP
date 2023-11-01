@@ -12,8 +12,7 @@ Ball::Ball()
 Ball::Ball(double racketPosx, double racketPosy, double racketSizex)
 {
 	setSize(BALL_SIZE_WIDTH, BALL_SIZE_HEIGHT);
-	setPosition(racketPosx + racketSizex / 2 - getSize(0) / 2,
-		racketPosy + getSize(1));
+	setPosition(racketPosx + racketSizex / 2 - getSize(0) / 2, racketPosy + getSize(1));
 	launchFlag = 0;
 	setVec(0, SPEED);
 	maxSpeed = SPEED;
@@ -109,7 +108,6 @@ void Ball::RacketColision(int racketPosx, int racketPosy, int racketSizex, int d
 	int x1 = x0 + getSize(0);
 	int y0 = getPosition(1) + getVec(1);
 	int y1 = y0 - getSize(1);
-
 
 	if ((x0 < racketPosx + racketSizex)	&& (x1 > racketPosx) && (y1 < racketPosy))
 	{

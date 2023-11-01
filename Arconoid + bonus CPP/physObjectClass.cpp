@@ -10,7 +10,7 @@ void PhysObject::setColor(double r, double g, double b)
 double PhysObject::getColor(int i)
 {
 	if (i == 0) return color.red;
-	else if (i == 1) return color.green;
+	else if (i == 1) return color.green; // map or list
 	else return color.blue;
 }
 

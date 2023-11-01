@@ -13,6 +13,9 @@ Racket::Racket(int windSizex)
 	setPosition((windSizex - getSize(0)) / 2, RACKET_YPOSITION);
 
 	setColor(0.0, 1.0, 0.0);
+	
+	racketSpeed.x = 0;
+	racketSpeed.y = 0;
 }
 
 //void Racket::RacketInitialise(int windSizex)

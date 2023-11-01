@@ -1,5 +1,5 @@
 #include "game.h"
-#include "windowClass.h"
+#include "windowClass.h" // коменты убрать new, delete
 
 #include <glut.h>
 #include <windows.h>
@@ -9,24 +9,36 @@
 Window wind;
 
 void SystemOpen(int argc, char** argv)
-{	
+{
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
 }
 void SystemRelease()
 {
 	std::cout << "END" << std::endl << wind.getScore() << std::endl;
+	_CrtDumpMemoryLeaks();
 	exit(1);
 }
-void SystemInitialise(int hp, int next_level_flag, int blockCount, int level)
+void GameInitialize(int hp, int level)
 {
-	wind = Window();
+	wind = Window(hp, level, WINDOW_SIZEX, WINDOW_SIZEY, WINDOW_POSITIONX, WINDOW_POSITIONY);
 
 	wind.racket = Racket(wind.getSize(0));
 
-	//wind.ball = new class Ball;
+	wind.ball = Ball(wind.racket.getPosition(0), wind.racket.getPosition(1), wind.racket.getSize(0));
 
-	//wind.ball.~Ball();//????
+	wind.ChooseLevel();
+	
+	SystemUpdate();
+}
+
+void GameUpdate(int hp, int next_level_flag, int level)
+{
+	wind.setLevel(level);
+	wind.setHp(hp);
+
+	wind.racket = Racket(wind.getSize(0));
+
 	wind.ball = Ball(wind.racket.getPosition(0), wind.racket.getPosition(1), wind.racket.getSize(0));
 
 	if (next_level_flag == 0)
@@ -34,10 +46,9 @@ void SystemInitialise(int hp, int next_level_flag, int blockCount, int level)
 		wind.ChooseLevel();
 	}
 
-	//ball.ReleaseFireBall();
-
 	SystemUpdate();
 }
+
 void SystemUpdate()
 {
 	glutInitWindowPosition(wind.getPosition(0), wind.getPosition(1));
@@ -122,7 +133,7 @@ void EndGame(int win_point)
 		else
 		{
 			wind.setLevel(wind.getLevel() + 1);
-			SystemInitialise(wind.getHp(), 0, 0, wind.getLevel());
+			GameUpdate(wind.getHp(), 0, wind.getLevel());
 		}
 	}
 	else
@@ -135,7 +146,7 @@ void EndGame(int win_point)
 		{
 			wind.setHp(wind.getHp() - 1);
 			wind.BonusRelease();
-			SystemInitialise(wind.getHp(), 1, wind.getBlokSize(), wind.getLevel());
+			GameUpdate(wind.getHp(), 1, wind.getLevel());
 		}
 	}
 }

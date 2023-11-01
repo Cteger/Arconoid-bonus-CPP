@@ -1,4 +1,4 @@
-#pragma once
+#pragma once // crtgbg map alloc
 
 #include "physObjectClass.h"
 #include "ballCLass.h"
@@ -8,12 +8,12 @@
 
 #include <vector>
 
-class Window: public PhysObject//, public Bonus
+class Window : public PhysObject
 {
 private:
 	int hp;
 	int level;
-	int menuSize;
+	int menuSize = MENU_SIZE; //const
 	int score;
 
 	std::vector<Bonus*> bonus;
@@ -24,7 +24,7 @@ public:
 	Racket racket;
 
 	Window();
-	Window(int windMenuSize, int newHp, int newLevel, int windSizex, int windSizey, int windPosx, int windPosy);
+	Window(int newHp, int newLevel, int windSizex, int windSizey, int windPosx, int windPosy);
 
 	void ChooseLevel();
 	void CreateLvlOne();
@@ -44,12 +44,10 @@ public:
 	void NewHP();
 	void DrawHP();
 
-	void setMenuSize(int wind_menuSize);
 	void setLevel(int wind_level);
 	void setHp(int wind_hp);
 
 	int getHp();
 	int getLevel();
 	int getScore();
-	int getBlokSize();
 };

@@ -14,7 +14,7 @@ public:
 
 	Racket(int windSizex);
 
-	void RacketInitialise(int windSizex);
+	//void RacketInitialise(int windSizex);
 
 	void RenderRacket(int x, int y, int windSizex);
 	void DrawRacket();

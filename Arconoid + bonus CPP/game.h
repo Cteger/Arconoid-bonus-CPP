@@ -1,5 +1,5 @@
 #pragma once
-#define BALL_SIZE_HEIGHT 10
+#define BALL_SIZE_HEIGHT 10 // enum
 #define BALL_SIZE_WIDTH 10
 #define WINDOW_POSITIONX 200
 #define WINDOW_POSITIONY 50
@@ -18,7 +18,8 @@
 
 void SystemOpen(int argc, char** argv);
 void SystemRelease();
-void SystemInitialise(int hp, int next_level_flag, int blockCount, int level);
+void GameInitialize(int hp, int level);
+void GameUpdate(int hp, int next_level_flag, int level);
 void SystemUpdate();
 
 void RenderScene();

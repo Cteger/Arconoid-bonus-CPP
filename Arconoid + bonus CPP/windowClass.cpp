@@ -39,7 +39,7 @@ void Window::CreateLvlOne()
 
 	for (int i = 0; i < blokCount; i++)
 	{
-		auto new_blok = new Blok(i, menuSize, getSize(0), getSize(1), 60, 5, 1);
+		auto new_blok = new Blok(i, menuSize, getSize(0), getSize(1), 60, 5, 1);// утечка
 		bloks.push_back(new_blok);
 	}
 }

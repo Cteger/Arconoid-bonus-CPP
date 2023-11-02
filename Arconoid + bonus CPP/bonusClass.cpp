@@ -35,6 +35,11 @@ Bonus::Bonus(int blokPosx, int blokPosy, int blokSizex, int blokSizey)
 	setVec(0, (-0.5) * SPEED);
 }
 
+Bonus::~Bonus()
+{
+
+}
+
 
 int Bonus::CheckBonus(double racketPosx, double racketPosy, double racketSizex)
 {

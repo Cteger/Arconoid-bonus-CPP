@@ -21,7 +21,13 @@ void SystemRelease()
 }
 void GameInitialize(int hp, int level)
 {
-	wind = Window(hp, level, WINDOW_SIZEX, WINDOW_SIZEY, WINDOW_POSITIONX, WINDOW_POSITIONY);
+	wind.setSize(WINDOW_SIZEX, WINDOW_SIZEY);
+	wind.setPosition(WINDOW_POSITIONX, WINDOW_POSITIONY);
+
+	wind.setLevel(level);
+	wind.setHp(hp);
+
+	//wind = Window(hp, level, WINDOW_SIZEX, WINDOW_SIZEY, WINDOW_POSITIONX, WINDOW_POSITIONY);
 
 	wind.racket = Racket(wind.getSize(0));
 

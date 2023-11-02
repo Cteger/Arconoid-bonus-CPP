@@ -16,8 +16,8 @@ private:
 	int menuSize = MENU_SIZE; //const
 	int score;
 
-	std::vector<Bonus*> bonus;
-	std::vector<Blok*> bloks;
+	std::vector<Bonus> bonus;
+	std::vector<Blok> bloks;
 
 public:
 	Ball ball;

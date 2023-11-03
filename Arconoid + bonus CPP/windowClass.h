@@ -24,8 +24,6 @@ private:
 
 public:
 
-	//static int getMaxHp() { return maxHp; }
-
 	Menu menu;
 	Ball ball;
 	Racket racket;

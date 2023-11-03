@@ -60,10 +60,7 @@ void Window::CreateLvlTwo()
 {
 	srand(time(0));
 	int blockCount = 120;
-	/*for (int i = 0; i < bloks.size(); i++)
-	{
-		//bloks[i].~Blok(); // не работает
-	}*/
+	
 	bloks.clear();
 
 	for (int i = 0; i < blockCount; i++)
@@ -81,14 +78,12 @@ void Window::BlokDestroy(int i)
 	}
 	else
 	{
-		if (bloks[i].getStrength() == 1 || ball.getFireBallFlag() == 1)
+		if ((bloks[i].getStrength() == 1 || ball.getFireBallFlag() == 1) && bloks[i].getStrength() != 5)
 		{
 			if (CHANCE_OF_RANDOM_BONUS == 1)
 			{
 				BonusInitialise(i);
 			}
-
-			//bloks[i].~Blok();
 
 			bloks[i] = bloks[bloks.size() - 1];
 
@@ -115,12 +110,13 @@ void Window::CheckBallColision()
 	{
 		if (bloks[i].getStrength() != 0)
 		{
-			if (ball.BlokColision(bloks[i].getPosition(0), bloks[i].getPosition(1), bloks[i].getSize(0), bloks[i].getSize(1)))
+			if (ball.BlokColision(bloks[i].getPosition(0), bloks[i].getPosition(1), bloks[i].getSize(0), bloks[i].getSize(1), bloks[i].getStrength()))
 			{
 				BlokDestroy(i);
 				break;
-			}
+			}		
 		}
+
 	}
 }
 
@@ -151,11 +147,6 @@ void Window::RenderBonus()
 }
 void Window::BonusRelease()
 {
-	for (int i = 0; i < bonus.size(); i++)
-	{
-		//bonus[i].~Bonus();//не работает
-	}
-
 	bonus.clear();
 }
 void Window::BonusCatch(int bonus_i)
@@ -183,8 +174,6 @@ void Window::BonusCatch(int bonus_i)
 }
 void Window::BonusDestroy(int bonus_i)
 {
-	//bonus[bonus_i].~Bonus();
-
 	bonus[bonus_i] = bonus[bonus.size() - 1];
 
 	bonus.pop_back();

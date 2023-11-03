@@ -95,7 +95,7 @@ void Ball::RacketColision(int racketPosx, int racketPosy, int racketSizex, int d
 		setVec(getVec(0), (-1) * getVec(1));
 	}
 }
-bool Ball::BlokColision(int blokPosx, int blokPosy, int blokSizex, int blokSizey)
+bool Ball::BlokColision(int blokPosx, int blokPosy, int blokSizex, int blokSizey, int strength)
 {
 	int x0 = getPosition(0) + getVec(0);
 	int x1 = x0 + getSize(0);
@@ -106,7 +106,7 @@ bool Ball::BlokColision(int blokPosx, int blokPosy, int blokSizex, int blokSizey
 		&& (((y1 < blokPosy) && (y0 > blokPosy) && (y0 > blokPosy - blokSizey))
 			|| ((y1 < blokPosy) && (y1 < blokPosy - blokSizey) && (y0 > blokPosy - blokSizey))))
 	{
-		if (fireBallFlag == 0)
+		if (fireBallFlag == 0 || strength == 5)
 		{
 			setVec(getVec(0), (-1) * getVec(1));
 		}

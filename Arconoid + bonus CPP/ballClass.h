@@ -21,7 +21,7 @@ public:
 
 	void MenuColision(int windSizex, int windSizey);
 	void RacketColision(int racketPosx, int racketPosy, int racketSizex, int deltaRacketSpeed);
-	bool BlokColision(int blokPosx, int blokPosy, int blokSizex, int blokSizey);
+	bool BlokColision(int blokPosx, int blokPosy, int blokSizex, int blokSizey, int strength);
 
 	void FireBallInitialise();
 	void ReleaseFireBall();

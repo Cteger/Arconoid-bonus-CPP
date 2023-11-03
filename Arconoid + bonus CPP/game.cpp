@@ -21,12 +21,6 @@ void SystemRelease()
 }
 void GameInitialize(int level)
 {
-	/*wind.setSize(Param::WINDOW_SIZEX, Param::WINDOW_SIZEY);
-	wind.setPosition(Param::WINDOW_POSITIONX, Param::WINDOW_POSITIONY);
-
-	wind.setLevel(level);
-	wind.hp.setHp(hp);*/
-
 	wind = Window(Param::HP_COUNT, level, WINDOW_SIZEX, WINDOW_SIZEY, WINDOW_POSITIONX, WINDOW_POSITIONY); // утечка
 
 	wind.menu = Menu(wind.getSize(0), Param::MENU_SIZE, wind.getSize(1) - 1);

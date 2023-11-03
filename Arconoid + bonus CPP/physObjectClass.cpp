@@ -39,7 +39,7 @@ void PhysObject::setColor(double r, double g, double b)
 double PhysObject::getColor(std::string new_color)
 {
 	if (new_color == "red") return color.map["red"];
-	else if (new_color == "green") return color.map["green"]; // map or list
+	else if (new_color == "green") return color.map["green"];
 	else if (new_color == "blue") return color.map["blue"];
 	else return 0;
 }

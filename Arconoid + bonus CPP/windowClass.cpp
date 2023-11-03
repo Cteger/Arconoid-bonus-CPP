@@ -58,11 +58,12 @@ void Window::CreateLvlOne()
 }
 void Window::CreateLvlTwo()
 {
+	srand(time(0));
 	int blockCount = 120;
-	for (int i = 0; i < bloks.size(); i++)
+	/*for (int i = 0; i < bloks.size(); i++)
 	{
 		//bloks[i].~Blok(); // не работает
-	}
+	}*/
 	bloks.clear();
 
 	for (int i = 0; i < blockCount; i++)
@@ -95,7 +96,7 @@ void Window::BlokDestroy(int i)
 
 			score += 20;
 		}
-		else
+		else if (bloks[i].getStrength() < 5)
 		{
 			bloks[i].setStrength(bloks[i].getStrength() - 1);
 			bloks[i].ResetBlokColor();
@@ -103,14 +104,6 @@ void Window::BlokDestroy(int i)
 		}
 	}
 }
-void Window::DrawBloks()
-{
-	for (int i = 0; i < bloks.size(); i++)
-	{
-		bloks[i].DrawPhysObject();
-	}
-}
-
 
 void Window::CheckBallColision()
 {
@@ -120,10 +113,13 @@ void Window::CheckBallColision()
 
 	for (int i = 0; i < bloks.size(); i++)
 	{
-		if (ball.BlokColision(bloks[i].getPosition(0), bloks[i].getPosition(1), bloks[i].getSize(0), bloks[i].getSize(1)))
+		if (bloks[i].getStrength() != 0)
 		{
-			BlokDestroy(i);
-			break;
+			if (ball.BlokColision(bloks[i].getPosition(0), bloks[i].getPosition(1), bloks[i].getSize(0), bloks[i].getSize(1)))
+			{
+				BlokDestroy(i);
+				break;
+			}
 		}
 	}
 }
@@ -200,7 +196,16 @@ void Window::DrawHp()
 		hp[i].DrawPhysObject();
 	}
 }
-
+void Window::DrawBloks()
+{
+	for (int i = 0; i < bloks.size(); i++)
+	{
+		if (bloks[i].getStrength() != 0)
+		{
+			bloks[i].DrawPhysObject();
+		}
+	}
+}
 void Window::DrawBonus()
 {
 	for (int i = 0; i < bonus.size(); i++)

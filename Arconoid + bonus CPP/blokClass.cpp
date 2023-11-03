@@ -43,6 +43,10 @@ void Blok::ResetBlokColor()
 	{
 		setColor(1.0, 0.5, 0.5);
 	}
+	else if (strength == 5)
+	{
+		setColor(0.5, 0.5, 0.5);
+	}
 }
 
 void Blok::setStrength(int i)

@@ -11,11 +11,11 @@ Ball::Ball()
 
 Ball::Ball(double racketPosx, double racketPosy, double racketSizex)
 {
-	setSize(BALL_SIZE_WIDTH, BALL_SIZE_HEIGHT);
+	setSize(Param::BALL_SIZE_WIDTH, Param::BALL_SIZE_HEIGHT);
 	setPosition(racketPosx + racketSizex / 2 - getSize(0) / 2, racketPosy + getSize(1));
 	launchFlag = 0;
-	setVec(0, SPEED);
-	maxSpeed = SPEED;
+	maxSpeed = Param::SPEED;
+	setVec(0, maxSpeed);
 
 	fireBallFlag = 0;
 
@@ -27,24 +27,11 @@ Ball::~Ball()
 
 }
 
-//void Ball::BallInitialise(double racketPosx, double racketPosy, double racketSizex)
-//{
-//	setSize(BALL_SIZE_WIDTH, BALL_SIZE_HEIGHT);
-//	setPosition(racketPosx + racketSizex / 2 - getSize(0) / 2,
-//		racketPosy + getSize(1));
-//	launchFlag = 0;
-//	setVec(0, SPEED);
-//	maxSpeed = SPEED;
-//
-//	fireBallFlag = 0;
-//
-//	setColor(0.0, 0.0, 0.0);
-//}
 void Ball::BallLaunch(int deltaRacketSpeed)
 {
 	if (launchFlag == 0)
 	{
-		setVec(deltaRacketSpeed + 1 - maxSpeed / 10, sqrt(maxSpeed * maxSpeed - getVec(0) * getVec(0)));
+		setVec(deltaRacketSpeed - maxSpeed / 10, sqrt(maxSpeed * maxSpeed - getVec(0) * getVec(0)));
 		launchFlag = 1;
 		glutPostRedisplay();
 	}
@@ -64,22 +51,7 @@ bool Ball::RenderBall(double racketPosx, double racketPosy, double racketSizex)
 	}
 }
 
-void Ball::DrawBall()
-{
-	glBegin(GL_QUADS);
-
-	glColor3f(getColor(0), getColor(1), getColor(2));
-
-	glVertex2d(getPosition(0), getPosition(1));
-	glVertex2d(getPosition(0) + getSize(0), getPosition(1));
-	glVertex2d(getPosition(0) + getSize(0), getPosition(1) - getSize(1));
-	glVertex2d(getPosition(0), getPosition(1) - getSize(1));
-
-	glEnd();
-}
-
-
-void Ball::MenuColision(int menuSize, int windSizex, int windSizey)
+void Ball::MenuColision(int windSizex, int windSizey)
 {
 	int x0 = getPosition(0) + getVec(0);
 	int x1 = x0 + getSize(0);
@@ -91,7 +63,7 @@ void Ball::MenuColision(int menuSize, int windSizex, int windSizey)
 		setVec((-1) * getVec(0), getVec(1));
 	}
 
-	if (y0 > windSizey - menuSize)
+	if (y0 > windSizey)
 	{
 		setVec(getVec(0), (-1) * getVec(1));
 		ReleaseFireBall();
@@ -109,7 +81,7 @@ void Ball::RacketColision(int racketPosx, int racketPosy, int racketSizex, int d
 	int y0 = getPosition(1) + getVec(1);
 	int y1 = y0 - getSize(1);
 
-	if ((x0 < racketPosx + racketSizex)	&& (x1 > racketPosx) && (y1 < racketPosy))
+	if ((x0 < racketPosx + racketSizex) && (x1 > racketPosx) && (y1 < racketPosy))
 	{
 		setVec(getVec(0) + ((deltaRacketSpeed) % 10), getVec(1));
 		if (getVec(0) > maxSpeed)
@@ -130,9 +102,9 @@ bool Ball::BlokColision(int blokPosx, int blokPosy, int blokSizex, int blokSizey
 	int y0 = getPosition(1) + getVec(1);
 	int y1 = y0 - getSize(1);
 
-	if ((x1 > blokPosx)	&& (x0 < blokPosx + blokSizex)
-		&& (((y1 < blokPosy) && (y0 > blokPosy)	&& (y0 > blokPosy - blokSizey))
-		|| ((y1 < blokPosy)	&& (y1 < blokPosy - blokSizey) && (y0 > blokPosy - blokSizey))))
+	if ((x1 > blokPosx) && (x0 < blokPosx + blokSizex)
+		&& (((y1 < blokPosy) && (y0 > blokPosy) && (y0 > blokPosy - blokSizey))
+			|| ((y1 < blokPosy) && (y1 < blokPosy - blokSizey) && (y0 > blokPosy - blokSizey))))
 	{
 		if (fireBallFlag == 0)
 		{
@@ -142,7 +114,7 @@ bool Ball::BlokColision(int blokPosx, int blokPosy, int blokSizex, int blokSizey
 	}
 	else if (((y1 < blokPosy) && (y0 > blokPosy - blokSizey))
 		&& (((x1 > blokPosx) && (x0 < blokPosx) && (x0 < blokPosx + blokSizex))
-		|| ((x1 > blokPosx)	&& (x1 > blokPosx + blokSizex) && (x0 < blokPosx + blokSizex))))
+			|| ((x1 > blokPosx) && (x1 > blokPosx + blokSizex) && (x0 < blokPosx + blokSizex))))
 	{
 		if (fireBallFlag == 0)
 		{

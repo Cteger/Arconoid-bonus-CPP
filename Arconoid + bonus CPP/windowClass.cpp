@@ -2,19 +2,36 @@
 
 #include <glut.h>
 
+void Window::HpInitialize(int ballSizex, int ballSizey, int windSizey)
+{
+	for (int i = 0; i < hpCount; i++)
+	{
+		hp[i] = Hp(ballSizex, ballSizey, 10 + i * (ballSizex + 5), windSizey - 3);
+	}
+}
+
+void Window::NewHP()
+{
+	if (hpCount < maxHp)
+	{
+		hpCount++;
+	}
+}
+
 Window::Window()
 {
 
 }
 
-Window::Window(int newHp, int newLevel, int windSizex, int windSizey, int windPosx, int windPosy) //утечка
+Window::Window(int hpCount, int level, int windSizex, int windSizey, int windPosx, int windPosy)
 {
 	setSize(windSizex, windSizey);
 	setPosition(windPosx, windPosy);
 
-	level = newLevel;
-	hp = newHp;
+	this->level = level;
 	score = 0;
+	this->hpCount = hpCount;
+	maxHp = hpCount;
 }
 
 void Window::ChooseLevel()
@@ -31,10 +48,10 @@ void Window::ChooseLevel()
 void Window::CreateLvlOne()
 {
 	int blokCount = 15;
-	
+
 	for (int i = 0; i < blokCount; i++)
 	{
-		auto *new_blok = new Blok(i, menuSize, getSize(0), getSize(1), 60, 5, 1);// утечка
+		auto* new_blok = new Blok(i, getSize(0), getSize(1) - menu.getMenuSize(), 60, 5, 1);// утечка
 		bloks.push_back(*new_blok);
 		delete new_blok;
 	}
@@ -44,13 +61,13 @@ void Window::CreateLvlTwo()
 	int blockCount = 120;
 	for (int i = 0; i < bloks.size(); i++)
 	{
-		bloks[i].~Blok(); // не работает
+		//bloks[i].~Blok(); // не работает
 	}
 	bloks.clear();
 
 	for (int i = 0; i < blockCount; i++)
 	{
-		auto new_blok = new Blok(i, menuSize, getSize(0), getSize(1), 15, 10, CHANCE_OF_RANDOM);
+		auto* new_blok = new Blok(i, getSize(0), getSize(1) - menu.getMenuSize(), 15, 10, CHANCE_OF_RANDOM_BLOK);
 		bloks.push_back(*new_blok);
 		delete new_blok;
 	}
@@ -65,12 +82,12 @@ void Window::BlokDestroy(int i)
 	{
 		if (bloks[i].getStrength() == 1 || ball.getFireBallFlag() == 1)
 		{
-			if (CHANCE_OF_RANDOM == 1)
+			if (CHANCE_OF_RANDOM_BONUS == 1)
 			{
 				BonusInitialise(i);
 			}
 
-			bloks[i].~Blok();
+			//bloks[i].~Blok();
 
 			bloks[i] = bloks[bloks.size() - 1];
 
@@ -90,14 +107,14 @@ void Window::DrawBloks()
 {
 	for (int i = 0; i < bloks.size(); i++)
 	{
-		bloks[i].DrawBlok();
+		bloks[i].DrawPhysObject();
 	}
 }
 
 
 void Window::CheckBallColision()
 {
-	ball.MenuColision(menuSize, getSize(0), getSize(1));
+	ball.MenuColision(getSize(0), getSize(1) - menu.getMenuSize());
 
 	ball.RacketColision(racket.getPosition(0), racket.getPosition(1), racket.getSize(0), racket.getRacketSpeed(0) - racket.getRacketSpeed(1));
 
@@ -140,7 +157,7 @@ void Window::BonusRelease()
 {
 	for (int i = 0; i < bonus.size(); i++)
 	{
-		bonus[i].~Bonus();//не работает
+		//bonus[i].~Bonus();//не работает
 	}
 
 	bonus.clear();
@@ -170,73 +187,37 @@ void Window::BonusCatch(int bonus_i)
 }
 void Window::BonusDestroy(int bonus_i)
 {
-	bonus[bonus_i].~Bonus();
+	//bonus[bonus_i].~Bonus();
 
 	bonus[bonus_i] = bonus[bonus.size() - 1];
 
 	bonus.pop_back();
 }
+void Window::DrawHp()
+{
+	for (int i = 0; i < hpCount; i++)
+	{
+		hp[i].DrawPhysObject();
+	}
+}
+
 void Window::DrawBonus()
 {
 	for (int i = 0; i < bonus.size(); i++)
 	{
-		bonus[i].DrawBonus();
+		bonus[i].DrawPhysObject();
 	}
 }
 
-
-void Window::NewHP()
+void Window::setLevel(int level)
 {
-	if (hp < 3)
-	{
-		hp++;
-	}
+	this->level = level;
 }
-void Window::DrawHP()
+void Window::setHpCount(int hpCount)
 {
-	glColor3f(0, 0, 0);
-
-	glBegin(GL_LINE_LOOP);
-
-	glVertex2d(0, getSize(1) - 1);
-	glVertex2d(getSize(0), getSize(1) - 1);
-	glVertex2d(getSize(0), getSize(1) - menuSize);
-	glVertex2d(0, getSize(1) - menuSize);
-
-	glEnd();
-
-
-	glBegin(GL_QUADS);
-
-	glColor3f(0, 0, 0);
-
-	for (int i = 0; i < hp; i++)
-	{
-		glVertex2d(300 + i * ball.getSize(0) + i * 5,
-			getSize(1) - 3);
-		glVertex2d(300 + (i + 1) * ball.getSize(0) + 5 * i,
-			getSize(1) - 3);
-		glVertex2d(300 + (i + 1) * ball.getSize(0) + 5 * i,
-			getSize(1) - 3 - ball.getSize(1));
-		glVertex2d(300 + i * (ball.getSize(0) + 5),
-			getSize(1) - 3 - ball.getSize(1));
-	}
-	glEnd();
+	this->hpCount = hpCount;
 }
 
-
-void Window::setLevel(int wind_level)
-{
-	level = wind_level;
-}
-void Window::setHp(int wind_hp)
-{
-	hp = wind_hp;
-}
-int Window::getHp()
-{
-	return hp;
-}
 int Window::getLevel()
 {
 	return level;
@@ -244,4 +225,8 @@ int Window::getLevel()
 int Window::getScore()
 {
 	return score;
+}
+int Window::getHpCount()
+{
+	return hpCount;
 }

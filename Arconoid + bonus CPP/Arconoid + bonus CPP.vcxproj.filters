@@ -34,7 +34,10 @@
     <ClCompile Include="vectorStruct.cpp">
       <Filter>Файлы ресурсов</Filter>
     </ClCompile>
-    <ClCompile Include="colorStruct.cpp">
+    <ClCompile Include="colorMapStruct.cpp">
+      <Filter>Файлы ресурсов</Filter>
+    </ClCompile>
+    <ClCompile Include="menuClass.cpp">
       <Filter>Файлы ресурсов</Filter>
     </ClCompile>
   </ItemGroup>
@@ -60,10 +63,13 @@
     <ClInclude Include="windowClass.h">
       <Filter>Файлы ресурсов</Filter>
     </ClInclude>
-    <ClInclude Include="colorStruct.h">
+    <ClInclude Include="vectorStruct.h">
       <Filter>Файлы ресурсов</Filter>
     </ClInclude>
-    <ClInclude Include="vectorStruct.h">
+    <ClInclude Include="colorMapStruct.h">
+      <Filter>Файлы ресурсов</Filter>
+    </ClInclude>
+    <ClInclude Include="menuClass.h">
       <Filter>Файлы ресурсов</Filter>
     </ClInclude>
   </ItemGroup>

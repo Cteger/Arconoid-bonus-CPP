@@ -1,12 +1,11 @@
 #pragma once
 #include "game.h"
 #include "physObjectClass.h"
-#include "vectorStruct.h"
 
-class Racket: public PhysObject
+class Racket : public PhysObject
 {
 private:
-	dVector racketSpeed;
+	CustomVec<double> racketSpeed;
 
 public:
 
@@ -14,10 +13,7 @@ public:
 
 	Racket(int windSizex);
 
-	//void RacketInitialise(int windSizex);
-
 	void RenderRacket(int x, int y, int windSizex);
-	void DrawRacket();
 
 	void LittleRacketInitialise();
 	void BigRacketInitialise();

@@ -1,17 +1,47 @@
 #include "physObjectClass.h"
 
-void PhysObject::setColor(double r, double g, double b)
+#include <glut.h>
+
+
+
+void PhysObject::DrawPhysObject()
 {
-	color.red = r;
-	color.green = g;
-	color.blue = b;
+	glBegin(GL_QUADS);
+
+	glColor3f(color.map["red"], color.map["green"], color.map["blue"]);
+
+	glVertex2d(position.x, position.y);
+	glVertex2d(position.x + size.x, position.y);
+	glVertex2d(position.x + size.x, position.y - size.y);
+	glVertex2d(position.x, position.y - size.y);
+
+	glEnd();
+
+	glColor3f(0, 0, 0);
+
+	glBegin(GL_LINE_LOOP);
+
+	glVertex2d(position.x, position.y);
+	glVertex2d(position.x + size.x, position.y);
+	glVertex2d(position.x + size.x, position.y - size.y);
+	glVertex2d(position.x, position.y - size.y);
+
+	glEnd();
 }
 
-double PhysObject::getColor(int i)
+void PhysObject::setColor(double r, double g, double b)
 {
-	if (i == 0) return color.red;
-	else if (i == 1) return color.green; // map or list
-	else return color.blue;
+	color.map["red"] = r;
+	color.map["green"] = g;
+	color.map["blue"] = b;
+}
+
+double PhysObject::getColor(std::string new_color)
+{
+	if (new_color == "red") return color.map["red"];
+	else if (new_color == "green") return color.map["green"]; // map or list
+	else if (new_color == "blue") return color.map["blue"];
+	else return 0;
 }
 
 

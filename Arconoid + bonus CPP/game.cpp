@@ -1,5 +1,5 @@
 #include "game.h"
-#include "windowClass.h" // коменты убрать new, delete
+#include "windowClass.h"
 
 #include <glut.h>
 #include <windows.h>
@@ -19,29 +19,33 @@ void SystemRelease()
 	_CrtDumpMemoryLeaks();
 	exit(1);
 }
-void GameInitialize(int hp, int level)
+void GameInitialize(int level)
 {
-	wind.setSize(WINDOW_SIZEX, WINDOW_SIZEY);
-	wind.setPosition(WINDOW_POSITIONX, WINDOW_POSITIONY);
+	/*wind.setSize(Param::WINDOW_SIZEX, Param::WINDOW_SIZEY);
+	wind.setPosition(Param::WINDOW_POSITIONX, Param::WINDOW_POSITIONY);
 
 	wind.setLevel(level);
-	wind.setHp(hp);
+	wind.hp.setHp(hp);*/
 
-	//wind = Window(hp, level, WINDOW_SIZEX, WINDOW_SIZEY, WINDOW_POSITIONX, WINDOW_POSITIONY);
+	wind = Window(Param::HP_COUNT, level, WINDOW_SIZEX, WINDOW_SIZEY, WINDOW_POSITIONX, WINDOW_POSITIONY); // утечка
+
+	wind.menu = Menu(wind.getSize(0), Param::MENU_SIZE, wind.getSize(1) - 1);
 
 	wind.racket = Racket(wind.getSize(0));
 
 	wind.ball = Ball(wind.racket.getPosition(0), wind.racket.getPosition(1), wind.racket.getSize(0));
 
+	wind.HpInitialize(wind.ball.getSize(0), wind.ball.getSize(1), wind.getSize(1));
+
 	wind.ChooseLevel();
-	
+
 	SystemUpdate();
 }
 
-void GameUpdate(int hp, int next_level_flag, int level)
+void GameUpdate(int hpCount, int next_level_flag, int level)
 {
 	wind.setLevel(level);
-	wind.setHp(hp);
+	wind.setHpCount(hpCount);
 
 	wind.racket = Racket(wind.getSize(0));
 
@@ -75,12 +79,12 @@ void SystemUpdate()
 
 void RenderScene()
 {
+
 	if (wind.ball.RenderBall(wind.racket.getPosition(0), wind.racket.getPosition(1), wind.racket.getSize(0)))
 	{
 		wind.CheckBallColision();
-		wind.ball.setPosition(wind.ball.getPosition(0) + wind.ball.getVec(0),
-			wind.ball.getPosition(1) + wind.ball.getVec(1));
-		Sleep(SLEEP);
+		wind.ball.setPosition(wind.ball.getPosition(0) + wind.ball.getVec(0), wind.ball.getPosition(1) + wind.ball.getVec(1));
+		Sleep(Param::SLEEP);
 	}
 
 	wind.RenderBonus();
@@ -89,25 +93,21 @@ void RenderScene()
 }
 void Draw()
 {
-	// очистка буфера цвета и глубины
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	glClearColor(1.0, 1.0, 1.0, 1.0);
 
-	//MENU
-	wind.DrawHP();
+	wind.menu.DrawPhysObject();
 
-	//BLOKS
+	wind.DrawHp();
+
 	wind.DrawBloks();
 
-	//RACKET
-	wind.racket.DrawRacket();
+	wind.racket.DrawPhysObject();
 
-	//BONUS
 	wind.DrawBonus();
 
-	//BALL	
-	wind.ball.DrawBall();
+	wind.ball.DrawPhysObject();
 
 	glutSwapBuffers();
 }
@@ -139,20 +139,20 @@ void EndGame(int win_point)
 		else
 		{
 			wind.setLevel(wind.getLevel() + 1);
-			GameUpdate(wind.getHp(), 0, wind.getLevel());
+			GameUpdate(wind.getHpCount(), 0, wind.getLevel());
 		}
 	}
 	else
 	{
-		if (wind.getHp() == 1)
+		if (wind.getHpCount() == 1)
 		{
 			SystemRelease();
 		}
 		else
 		{
-			wind.setHp(wind.getHp() - 1);
+			wind.setHpCount(wind.getHpCount() - 1);
 			wind.BonusRelease();
-			GameUpdate(wind.getHp(), 1, wind.getLevel());
+			GameUpdate(wind.getHpCount(), 1, wind.getLevel());
 		}
 	}
 }

@@ -10,15 +10,11 @@ private:
 
 public:
 
-	Blok(int i, int menuSize, int windSizex, int windSizey, int blokSizey, int lineSize, int strength);
+	Blok(int i, int windSizex, int windSizey, int blokSizey, int lineSize, int strength);
 	~Blok();
 
 	void ResetBlokColor();
-	void DrawBlok();
-
 
 	void setStrength(int i);
 	int getStrength();
 };
-
-

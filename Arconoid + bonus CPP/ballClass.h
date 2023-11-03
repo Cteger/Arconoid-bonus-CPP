@@ -2,7 +2,7 @@
 #include "game.h"
 #include "physObjectClass.h"
 
-struct Ball: public PhysObject
+struct Ball : public PhysObject
 {
 private:
 	int launchFlag;
@@ -15,13 +15,11 @@ public:
 	Ball(double racketPosx, double racketPosy, double racketSizex);
 	~Ball();
 
-	void BallInitialise(double racketPosx, double racketPosy, double racketSizex);
 	void BallLaunch(int deltaRacketSpeed);
 
 	bool RenderBall(double racketPosx, double racketPosy, double racketSizex);
-	void DrawBall();
 
-	void MenuColision(int menuSize, int windSizex, int windSizey); // menusize ----
+	void MenuColision(int windSizex, int windSizey);
 	void RacketColision(int racketPosx, int racketPosy, int racketSizex, int deltaRacketSpeed);
 	bool BlokColision(int blokPosx, int blokPosy, int blokSizex, int blokSizey);
 
@@ -31,5 +29,3 @@ public:
 
 	int getFireBallFlag();
 };
-
-

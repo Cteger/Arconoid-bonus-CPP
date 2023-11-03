@@ -1,25 +1,31 @@
 #pragma once
-#define BALL_SIZE_HEIGHT 10 // enum
-#define BALL_SIZE_WIDTH 10
-#define WINDOW_POSITIONX 200
-#define WINDOW_POSITIONY 50
-#define WINDOW_SIZEX 400
-#define WINDOW_SIZEY 600
-#define RACKET_WIDTH 100
-#define RACKET_HIGHT 7
-#define RACKET_YPOSITION 10
-#define BONUS_SIZE_HEIGHT 30
-#define BONUS_SIZE_WIDTH 30
-#define MENU_SIZE 20
-#define SLEEP 1
-#define SPEED 7
-#define CHANCE_OF_RANDOM (rand() % 4 + 1)
+
+#define CHANCE_OF_RANDOM_BLOK (rand() % 4 + 1)
 #define CHANCE_OF_RANDOM_BONUS (rand() % 4 + 1)
+
+enum Param
+{
+	BALL_SIZE_HEIGHT = 10,
+	BALL_SIZE_WIDTH = 10,
+	WINDOW_POSITIONX = 200,
+	WINDOW_POSITIONY = 50,
+	WINDOW_SIZEX = 400,
+	WINDOW_SIZEY = 600,
+	RACKET_WIDTH = 100,
+	RACKET_HIGHT = 7,
+	RACKET_YPOSITION = 10,
+	BONUS_SIZE_HEIGHT = 30,
+	BONUS_SIZE_WIDTH = 30,
+	MENU_SIZE = 20,
+	SLEEP = 9,
+	SPEED = 7,
+	HP_COUNT = 3
+};
 
 void SystemOpen(int argc, char** argv);
 void SystemRelease();
-void GameInitialize(int hp, int level);
-void GameUpdate(int hp, int next_level_flag, int level);
+void GameInitialize(int level);
+void GameUpdate(int hpCount, int next_level_flag, int level);
 void SystemUpdate();
 
 void RenderScene();

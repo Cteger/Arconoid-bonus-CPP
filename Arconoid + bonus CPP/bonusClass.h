@@ -16,4 +16,15 @@ public:
 	int CheckBonus(double racketPosx, double racketPosy, double racketSizex);
 
 	int getType();
+	void setType(int rand);
+};
+
+
+
+enum class BonusType
+{
+	FireBall,
+	LittleRacket,
+	BigRacket,
+	NewHp
 };

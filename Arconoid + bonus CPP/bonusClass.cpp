@@ -9,7 +9,7 @@ Bonus::Bonus(int blokPosx, int blokPosy, int blokSizex, int blokSizey)
 	setSize(Param::BONUS_SIZE_WIDTH, Param::BONUS_SIZE_HEIGHT);
 	setPosition(blokPosx + blokSizex / 2 - getSize(0) / 2,
 		blokPosy - blokSizey / 2 + getSize(1) / 2);
-	type = CHANCE_OF_RANDOM_BONUS;
+	setType(CHANCE_OF_RANDOM_BONUS);
 
 	if (type == 1)
 	{
@@ -59,4 +59,9 @@ int Bonus::CheckBonus(double racketPosx, double racketPosy, double racketSizex)
 int Bonus::getType()
 {
 	return type;
+}
+
+void Bonus::setType(int rand)
+{
+	if (rand == 0) type = rand;
 }

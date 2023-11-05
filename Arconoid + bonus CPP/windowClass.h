@@ -42,14 +42,14 @@ public:
 	void CheckBallColision();
 
 	void BonusInitialise(int blok_i);
-	void RenderBonus();
+	void RenderBonuses();
 	void BonusRelease();
 	void BonusCatch(int bonus_i);
 	void BonusDestroy(int bonus_i);
 
 	void DrawHp();
 	void DrawBloks();
-	void DrawBonus();
+	void DrawBonuses();
 
 	void setLevel(int level) { this->level = level; };
 	void setHpCount(int hpCount) { this->hpCount = hpCount; };

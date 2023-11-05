@@ -104,7 +104,7 @@ bool Ball::BlokColision(int blokPosx, int blokPosy, int blokSizex, int blokSizey
 		&& (((x1 > blokPosx) && (x0 < blokPosx) && (x0 < blokPosx + blokSizex))
 			|| ((x1 > blokPosx) && (x1 > blokPosx + blokSizex) && (x0 < blokPosx + blokSizex))))
 	{
-		if (fireBallFlag == 0)
+		if (fireBallFlag == 0 || strength == 5)
 		{
 			setVec((-1) * getVec(0), getVec(1));
 		}

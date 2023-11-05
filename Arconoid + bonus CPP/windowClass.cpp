@@ -55,12 +55,12 @@ void Window::CreateLvlTwo()
 {
 	srand(time(0));
 	int blockCount = 120;
-	
+
 	bloks.clear();
 
 	for (int i = 0; i < blockCount; i++)
 	{
-		auto* new_blok = new Blok(i, getSize(0), getSize(1) - menu.getMenuSize(), 15, 10, CHANCE_OF_RANDOM_BLOK);
+		Blok* new_blok = new Blok(i, getSize(0), getSize(1) - menu.getMenuSize(), 15, 10, CHANCE_OF_RANDOM_BLOK);
 		bloks.push_back(*new_blok);
 		delete new_blok;
 	}
@@ -86,7 +86,7 @@ void Window::BlokDestroy(int i)
 
 			score += 20;
 		}
-		else if (bloks[i].getStrength() < 5)
+		else if (bloks[i].getStrength() != 5)
 		{
 			bloks[i].setStrength(bloks[i].getStrength() - 1);
 			bloks[i].ResetBlokColor();
@@ -105,13 +105,13 @@ void Window::CheckBallColision()
 
 		for (int i = 0; i < bloks.size(); i++)
 		{
-			if (bloks[i].getStrength() != 0)
+			/*if (bloks[i].getStrength() != 0)
+			{*/
+			if (ball.BlokColision(bloks[i].getPosition(0), bloks[i].getPosition(1), bloks[i].getSize(0), bloks[i].getSize(1), bloks[i].getStrength()))
 			{
-				if (ball.BlokColision(bloks[i].getPosition(0), bloks[i].getPosition(1), bloks[i].getSize(0), bloks[i].getSize(1), bloks[i].getStrength()))
-				{
-					BlokDestroy(i);
-					break;
-				}
+				BlokDestroy(i);
+				break;
+				//}
 			}
 
 		}
@@ -121,18 +121,19 @@ void Window::CheckBallColision()
 
 void Window::BonusInitialise(int blok_i)
 {
-	auto new_bonus = new Bonus(bloks[blok_i].getPosition(0), bloks[blok_i].getPosition(1), bloks[blok_i].getSize(0), bloks[blok_i].getSize(1));
+	Bonus* new_bonus = new Bonus(bloks[blok_i].getPosition(0), bloks[blok_i].getPosition(1), bloks[blok_i].getSize(0), bloks[blok_i].getSize(1));
 
 	bonus.push_back(*new_bonus);
 
 	delete new_bonus;
 }
-void Window::RenderBonus()
+void Window::RenderBonuses()
 {
+	int j = 0;
+
 	for (int i = 0; i < bonus.size(); i++)
 	{
-		bonus[i].setPosition(bonus[i].getPosition(0), bonus[i].getPosition(1) + bonus[i].getVec(1));
-		int j = bonus[i].CheckBonus(racket.getPosition(0), racket.getPosition(1), racket.getSize(0));
+		j = bonus[i].RenderBonus(racket.getPosition(0), racket.getPosition(1), racket.getSize(0));
 		if (j == 1)
 		{
 			BonusDestroy(i);
@@ -193,7 +194,7 @@ void Window::DrawBloks()
 		}
 	}
 }
-void Window::DrawBonus()
+void Window::DrawBonuses()
 {
 	for (int i = 0; i < bonus.size(); i++)
 	{

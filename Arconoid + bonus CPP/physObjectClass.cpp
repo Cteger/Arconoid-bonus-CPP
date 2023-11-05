@@ -67,14 +67,3 @@ int PhysObject::getPosition(int i)
 	if (i == 0)	return position.x;
 	else return position.y;
 }
-
-void PhysObject::setVec(double x, double y)
-{
-	vect.x = x;
-	vect.y = y;
-}
-double PhysObject::getVec(int i)
-{
-	if (i == 0)	return vect.x;
-	else return vect.y;
-}

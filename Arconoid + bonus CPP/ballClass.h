@@ -1,8 +1,9 @@
 #pragma once
 #include "game.h"
+#include "vectorStruct.h"
 #include "physObjectClass.h"
 
-struct Ball : public PhysObject
+struct Ball : public PhysObject, public Vector
 {
 private:
 	bool launchFlag;

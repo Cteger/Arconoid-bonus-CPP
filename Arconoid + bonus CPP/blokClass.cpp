@@ -21,23 +21,23 @@ Blok::Blok(int i, int windSizex, int windSizey, int blokSizey, int lineSize, int
 
 void Blok::ResetBlokColor()
 {
-	if (strength == 1)
+	if (strength == Strength::Green)
 	{
 		setColor(0.0, 1.0, 0.0);
 	}
-	else if (strength == 2)
+	else if (strength == Strength::Yellow)
 	{
 		setColor(1.0, 1.0, 0.0);
 	}
-	else if (strength == 3)
+	else if (strength == Strength::Blue)
 	{
 		setColor(0.1, 0.2, 0.8);
 	}
-	else if (strength == 4)
+	else if (strength == Strength::Pink)
 	{
 		setColor(1.0, 0.5, 0.5);
 	}
-	else if (strength == 5)
+	else if (strength == Strength::Gray)
 	{
 		setColor(0.5, 0.5, 0.5);
 	}

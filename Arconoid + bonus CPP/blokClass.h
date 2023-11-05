@@ -17,3 +17,13 @@ public:
 	void setStrength(int strength) { this->strength = strength; };
 	int getStrength() { return strength; };
 };
+
+enum Strength
+{
+	White,
+	Green,
+	Yellow,
+	Blue,
+	Pink,
+	Gray
+};

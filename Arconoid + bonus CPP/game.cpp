@@ -16,7 +16,6 @@ void SystemOpen(int argc, char** argv)
 void SystemRelease()
 {
 	std::cout << "END" << std::endl << wind.getScore() << std::endl;
-	_CrtDumpMemoryLeaks();
 	exit(1);
 }
 void GameInitialize(int level)
@@ -77,7 +76,7 @@ void RenderScene()
 	wind.ball.RenderBall(wind.racket.getPosition(0), wind.racket.getPosition(1), wind.racket.getSize(0));
 	Sleep(Param::SLEEP);
 
-	wind.RenderBonus();
+	wind.RenderBonuses();
 
 	Draw();
 }
@@ -95,9 +94,9 @@ void Draw()
 
 	wind.racket.DrawPhysObject();
 
-	wind.DrawBonus();
-
 	wind.ball.DrawPhysObject();
+
+	wind.DrawBonuses();
 
 	glutSwapBuffers();
 }

@@ -9,7 +9,6 @@ private:
 	ColorMap color;
 	CustomVec<int> position;
 	CustomVec<int> size;
-	CustomVec<double> vect;
 
 public:
 
@@ -23,7 +22,4 @@ public:
 
 	void setPosition(int x, int y);
 	int getPosition(int i);
-
-	void setVec(double x, double y);
-	double getVec(int i);
 };

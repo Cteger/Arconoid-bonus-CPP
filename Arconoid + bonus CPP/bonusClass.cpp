@@ -11,24 +11,30 @@ Bonus::Bonus(int blokPosx, int blokPosy, int blokSizex, int blokSizey)
 		blokPosy - blokSizey / 2 + getSize(1) / 2);
 	setType(CHANCE_OF_RANDOM_BONUS);
 
-	if (type == 1)
+	if (type == BonusType::FireBall)
 	{
 		setColor(1.0, 0.1, 0.1);
 	}
-	else if (type == 2)
+	else if (type == BonusType::LittleRacket)
 	{
 		setColor(0.0, 0.5, 1.0);
 	}
-	else if (type == 3)
+	else if (type == BonusType::BigRacket)
 	{
 		setColor(1.0, 0.5, 0.0);
 	}
-	else if (type == 4)
+	else if (type == BonusType::NewHp)
 	{
 		setColor(0.0, 0.0, 0.0);
 	}
 
 	setVec(0, (-0.5) * Param::SPEED);
+}
+
+int Bonus::RenderBonus(double racketPosx, double racketPosy, double racketSizex)
+{
+	setPosition(getPosition(0), getPosition(1) + getVec(1));
+	return CheckBonus(racketPosx, racketPosy, racketSizex);
 }
 
 int Bonus::CheckBonus(double racketPosx, double racketPosy, double racketSizex)

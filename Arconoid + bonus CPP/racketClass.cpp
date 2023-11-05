@@ -1,10 +1,6 @@
 #include "racketClass.h"
 #include <glut.h>
 
-Racket::Racket()
-{
-
-}
 
 Racket::Racket(int windSizex)
 {

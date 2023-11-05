@@ -31,11 +31,6 @@ Bonus::Bonus(int blokPosx, int blokPosy, int blokSizex, int blokSizey)
 	setVec(0, (-0.5) * Param::SPEED);
 }
 
-Bonus::~Bonus()
-{
-
-}
-
 int Bonus::CheckBonus(double racketPosx, double racketPosy, double racketSizex)
 {
 	int x0 = getPosition(0);
@@ -54,14 +49,4 @@ int Bonus::CheckBonus(double racketPosx, double racketPosy, double racketSizex)
 		return 2;
 	}
 	return 0;
-}
-
-int Bonus::getType()
-{
-	return type;
-}
-
-void Bonus::setType(int rand)
-{
-	if (rand == 0) type = rand;
 }

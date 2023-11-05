@@ -19,12 +19,6 @@ Blok::Blok(int i, int windSizex, int windSizey, int blokSizey, int lineSize, int
 	ResetBlokColor();
 }
 
-Blok::~Blok()
-{
-
-}
-
-
 void Blok::ResetBlokColor()
 {
 	if (strength == 1)
@@ -47,13 +41,4 @@ void Blok::ResetBlokColor()
 	{
 		setColor(0.5, 0.5, 0.5);
 	}
-}
-
-void Blok::setStrength(int i)
-{
-	strength = i;
-}
-int Blok::getStrength()
-{
-	return strength;
 }

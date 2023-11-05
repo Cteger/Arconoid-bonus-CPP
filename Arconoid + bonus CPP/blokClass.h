@@ -9,12 +9,11 @@ private:
 	int strength;
 
 public:
-
+	Blok() {}
 	Blok(int i, int windSizex, int windSizey, int blokSizey, int lineSize, int strength);
-	~Blok();
 
 	void ResetBlokColor();
 
-	void setStrength(int i);
-	int getStrength();
+	void setStrength(int strength) { this->strength = strength; };
+	int getStrength() { return strength; };
 };

@@ -5,19 +5,18 @@
 struct Ball : public PhysObject
 {
 private:
-	int launchFlag;
+	bool launchFlag;
 	double maxSpeed;
-	int fireBallFlag;
+	bool fireBallFlag;
 
 public:
 
-	Ball();
+	Ball() {};
 	Ball(double racketPosx, double racketPosy, double racketSizex);
-	~Ball();
 
 	void BallLaunch(int deltaRacketSpeed);
 
-	bool RenderBall(double racketPosx, double racketPosy, double racketSizex);
+	void RenderBall(double racketPosx, double racketPosy, double racketSizex);
 
 	void MenuColision(int windSizex, int windSizey);
 	void RacketColision(int racketPosx, int racketPosy, int racketSizex, int deltaRacketSpeed);
@@ -26,6 +25,6 @@ public:
 	void FireBallInitialise();
 	void ReleaseFireBall();
 
-
-	int getFireBallFlag();
+	int getLaunchFlag() { return launchFlag; }
+	int getFireBallFlag() { return fireBallFlag; }
 };

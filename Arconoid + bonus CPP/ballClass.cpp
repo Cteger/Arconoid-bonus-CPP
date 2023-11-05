@@ -4,10 +4,6 @@
 #include <math.h>
 #include <glut.h>
 
-Ball::Ball()
-{
-
-}
 
 Ball::Ball(double racketPosx, double racketPosy, double racketSizex)
 {
@@ -22,32 +18,25 @@ Ball::Ball(double racketPosx, double racketPosy, double racketSizex)
 	setColor(0.0, 0.0, 0.0);
 }
 
-Ball::~Ball()
-{
-
-}
-
 void Ball::BallLaunch(int deltaRacketSpeed)
 {
-	if (launchFlag == 0)
+	if (!launchFlag)
 	{
 		setVec(deltaRacketSpeed - maxSpeed / 10, sqrt(maxSpeed * maxSpeed - getVec(0) * getVec(0)));
 		launchFlag = 1;
-		glutPostRedisplay();
 	}
 }
 
 
-bool Ball::RenderBall(double racketPosx, double racketPosy, double racketSizex)
+void Ball::RenderBall(double racketPosx, double racketPosy, double racketSizex)
 {
-	if (launchFlag == 0)
+	if (launchFlag)
 	{
-		setPosition(racketPosx + racketSizex / 2 - getSize(0) / 2, racketPosy + getSize(1));
-		return false;
+		setPosition(getPosition(0) + getVec(0), getPosition(1) + getVec(1));
 	}
 	else
 	{
-		return true;
+		setPosition(racketPosx + racketSizex / 2 - getSize(0) / 2, racketPosy + getSize(1));
 	}
 }
 
@@ -83,7 +72,7 @@ void Ball::RacketColision(int racketPosx, int racketPosy, int racketSizex, int d
 
 	if ((x0 < racketPosx + racketSizex) && (x1 > racketPosx) && (y1 < racketPosy))
 	{
-		setVec(getVec(0) + ((deltaRacketSpeed) % 10), getVec(1));
+		setVec(getVec(0) + ((deltaRacketSpeed) % 10), (-1) * getVec(1));
 		if (getVec(0) > maxSpeed)
 		{
 			setVec(maxSpeed, getVec(1));
@@ -92,7 +81,6 @@ void Ball::RacketColision(int racketPosx, int racketPosy, int racketSizex, int d
 		{
 			setVec((-1) * maxSpeed, getVec(1));
 		}
-		setVec(getVec(0), (-1) * getVec(1));
 	}
 }
 bool Ball::BlokColision(int blokPosx, int blokPosy, int blokSizex, int blokSizey, int strength)
@@ -104,7 +92,7 @@ bool Ball::BlokColision(int blokPosx, int blokPosy, int blokSizex, int blokSizey
 
 	if ((x1 > blokPosx) && (x0 < blokPosx + blokSizex)
 		&& (((y1 < blokPosy) && (y0 > blokPosy) && (y0 > blokPosy - blokSizey))
-			|| ((y1 < blokPosy) && (y1 < blokPosy - blokSizey) && (y0 > blokPosy - blokSizey))))
+		|| ((y1 < blokPosy) && (y1 < blokPosy - blokSizey) && (y0 > blokPosy - blokSizey))))
 	{
 		if (fireBallFlag == 0 || strength == 5)
 		{
@@ -138,10 +126,4 @@ void Ball::ReleaseFireBall()
 	fireBallFlag = 0;
 
 	setColor(0.0, 0.0, 0.0);
-}
-
-
-int Ball::getFireBallFlag()
-{
-	return fireBallFlag;
 }

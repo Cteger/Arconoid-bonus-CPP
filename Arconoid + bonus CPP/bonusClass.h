@@ -9,17 +9,14 @@ private:
 	int type;
 
 public:
-	Bonus();
+	Bonus() {};
 	Bonus(int blokPosx, int blokPosy, int blokSizex, int blokSizey);
-	~Bonus();
 
 	int CheckBonus(double racketPosx, double racketPosy, double racketSizex);
 
-	int getType();
-	void setType(int rand);
+	int getType() { return type; };
+	void setType(int rand) { type = rand; };
 };
-
-
 
 enum class BonusType
 {

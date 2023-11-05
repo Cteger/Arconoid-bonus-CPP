@@ -7,17 +7,15 @@ private:
 	int menuSize; //const
 
 public:
-	Menu();
+	Menu() {};
 	Menu(int menuSizex, int menuSizey, int menuPosy);
-	~Menu();
 
-	int getMenuSize();
+	int getMenuSize() { return menuSize; };
 };
 
 class Hp : public PhysObject
 {
 public:
-	Hp();
+	Hp() {};
 	Hp(int hpSizex, int hpSizey, int hpPosx, int hpPosy);
-	~Hp();
 };

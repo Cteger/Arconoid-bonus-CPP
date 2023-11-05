@@ -3,5 +3,5 @@
 int main(int argc, char** argv)
 {
 	SystemOpen(argc, argv);
-	GameInitialize(2);
+	GameInitialize(1);
 }

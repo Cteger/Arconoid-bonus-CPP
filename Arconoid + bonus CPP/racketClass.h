@@ -8,8 +8,7 @@ private:
 	CustomVec<double> racketSpeed;
 
 public:
-
-	Racket();
+	Racket() {};
 
 	Racket(int windSizex);
 

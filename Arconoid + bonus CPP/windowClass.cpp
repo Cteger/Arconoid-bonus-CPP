@@ -102,21 +102,24 @@ void Window::BlokDestroy(int i)
 
 void Window::CheckBallColision()
 {
-	ball.MenuColision(getSize(0), getSize(1) - menu.getMenuSize());
-
-	ball.RacketColision(racket.getPosition(0), racket.getPosition(1), racket.getSize(0), racket.getRacketSpeed(0) - racket.getRacketSpeed(1));
-
-	for (int i = 0; i < bloks.size(); i++)
+	if (ball.getLaunchFlag())
 	{
-		if (bloks[i].getStrength() != 0)
-		{
-			if (ball.BlokColision(bloks[i].getPosition(0), bloks[i].getPosition(1), bloks[i].getSize(0), bloks[i].getSize(1), bloks[i].getStrength()))
-			{
-				BlokDestroy(i);
-				break;
-			}		
-		}
+		ball.MenuColision(getSize(0), getSize(1) - menu.getMenuSize());
 
+		ball.RacketColision(racket.getPosition(0), racket.getPosition(1), racket.getSize(0), racket.getRacketSpeed(0) - racket.getRacketSpeed(1));
+
+		for (int i = 0; i < bloks.size(); i++)
+		{
+			if (bloks[i].getStrength() != 0)
+			{
+				if (ball.BlokColision(bloks[i].getPosition(0), bloks[i].getPosition(1), bloks[i].getSize(0), bloks[i].getSize(1), bloks[i].getStrength()))
+				{
+					BlokDestroy(i);
+					break;
+				}
+			}
+
+		}
 	}
 }
 
@@ -201,26 +204,4 @@ void Window::DrawBonus()
 	{
 		bonus[i].DrawPhysObject();
 	}
-}
-
-void Window::setLevel(int level)
-{
-	this->level = level;
-}
-void Window::setHpCount(int hpCount)
-{
-	this->hpCount = hpCount;
-}
-
-int Window::getLevel()
-{
-	return level;
-}
-int Window::getScore()
-{
-	return score;
-}
-int Window::getHpCount()
-{
-	return hpCount;
 }

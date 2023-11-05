@@ -73,13 +73,9 @@ void SystemUpdate()
 
 void RenderScene()
 {
-
-	if (wind.ball.RenderBall(wind.racket.getPosition(0), wind.racket.getPosition(1), wind.racket.getSize(0)))
-	{
-		wind.CheckBallColision();
-		wind.ball.setPosition(wind.ball.getPosition(0) + wind.ball.getVec(0), wind.ball.getPosition(1) + wind.ball.getVec(1));
-		Sleep(Param::SLEEP);
-	}
+	wind.CheckBallColision();
+	wind.ball.RenderBall(wind.racket.getPosition(0), wind.racket.getPosition(1), wind.racket.getSize(0));
+	Sleep(Param::SLEEP);
 
 	wind.RenderBonus();
 
@@ -118,6 +114,7 @@ void MouseButton(int button, int state, int x, int y)
 	if ((button == GLUT_LEFT_BUTTON) && (state == GLUT_DOWN))
 	{
 		wind.ball.BallLaunch(wind.racket.getRacketSpeed(0) - wind.racket.getRacketSpeed(1));
+		glutPostRedisplay();
 	}
 }
 

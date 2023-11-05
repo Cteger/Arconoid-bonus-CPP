@@ -51,10 +51,10 @@ public:
 	void DrawBloks();
 	void DrawBonus();
 
-	void setLevel(int level);
-	void setHpCount(int hpCount);
+	void setLevel(int level) { this->level = level; };
+	void setHpCount(int hpCount) { this->hpCount = hpCount; };
 
-	int getLevel();
-	int getScore();
-	int getHpCount();
+	int getLevel() { return level; };
+	int getScore() { return score; };
+	int getHpCount() { return hpCount; };
 };

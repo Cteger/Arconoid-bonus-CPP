@@ -31,7 +31,7 @@ public:
 	void HpInitialize(int ballSizex, int ballSizey, int windSizey);
 	void NewHP();
 
-	Window();
+	Window() {};
 	Window(int hpCount, int newLevel, int windSizex, int windSizey, int windPosx, int windPosy);
 
 	void ChooseLevel();

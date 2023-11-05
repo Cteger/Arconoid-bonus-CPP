@@ -18,11 +18,6 @@ void Window::NewHP()
 	}
 }
 
-Window::Window()
-{
-
-}
-
 Window::Window(int hpCount, int level, int windSizex, int windSizey, int windPosx, int windPosy)
 {
 	setSize(windSizex, windSizey);

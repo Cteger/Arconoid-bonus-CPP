@@ -6,9 +6,10 @@
 struct Ball : public PhysObject, public Vector
 {
 private:
-	bool launchFlag;
+	bool isBallLaunch;
 	double maxSpeed;
-	bool fireBallFlag;
+	bool isFireBall; //is fireball
+	bool isBarrier;
 
 public:
 
@@ -23,9 +24,12 @@ public:
 	void RacketColision(int racketPosx, int racketPosy, int racketSizex, int deltaRacketSpeed);
 	bool BlokColision(int blokPosx, int blokPosy, int blokSizex, int blokSizey, int strength);
 
-	void FireBallInitialise();
 	void ReleaseFireBall();
+	void ReleaseBarrier() { isBarrier = 0; };
 
-	int getLaunchFlag() { return launchFlag; }
-	int getFireBallFlag() { return fireBallFlag; }
+	void setIsFireBall(bool isFireBall) { this->isFireBall = isFireBall; };
+	void setIsBarrier(bool isBarrier) { this->isBarrier = isBarrier; };
+
+	int getIsBallLaunch() { return isBallLaunch; }
+	int getIsFireBall() { return isFireBall; }
 };

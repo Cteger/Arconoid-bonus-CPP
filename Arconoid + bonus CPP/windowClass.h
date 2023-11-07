@@ -1,5 +1,5 @@
 #pragma once
-
+#include "game.h"
 #include "physObjectClass.h"
 #include "ballCLass.h"
 #include "racketClass.h"
@@ -15,11 +15,11 @@ class Window : public PhysObject
 private:
 	int level;
 	int hpCount;
-	int maxHp;// static
+	int maxHp;
 	int score;
 
 	std::array<Hp, Param::HP_COUNT> hp;
-	std::vector<Bonus> bonus;
+	std::vector<Bonus*> bonuses;
 	std::vector<Blok> bloks;
 
 public:
@@ -28,11 +28,10 @@ public:
 	Ball ball;
 	Racket racket;
 
-	void HpInitialize(int ballSizex, int ballSizey, int windSizey);
-	void NewHP();
-
 	Window() {};
 	Window(int hpCount, int newLevel, int windSizex, int windSizey, int windPosx, int windPosy);
+
+	void HpInitialize(int ballSizex, int ballSizey, int windSizey);
 
 	void ChooseLevel();
 	void CreateLvlOne();
@@ -43,7 +42,7 @@ public:
 
 	void BonusInitialise(int blok_i);
 	void RenderBonuses();
-	void BonusRelease();
+	void BonusRelease() { bonuses.clear(); };
 	void BonusCatch(int bonus_i);
 	void BonusDestroy(int bonus_i);
 

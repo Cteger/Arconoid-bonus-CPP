@@ -5,7 +5,7 @@
 class Racket : public PhysObject
 {
 private:
-	CustomVec<double> racketSpeed;
+	CustomVec<int> racketSpeed;
 
 public:
 	Racket() {};
@@ -14,9 +14,5 @@ public:
 
 	void RenderRacket(int x, int y, int windSizex);
 
-	void LittleRacketInitialise();
-	void BigRacketInitialise();
-
 	int getRacketSpeed(int i);
 };
-

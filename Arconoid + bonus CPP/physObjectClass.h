@@ -11,6 +11,8 @@ private:
 	CustomVec<int> size;
 
 public:
+	PhysObject() {}
+	PhysObject(int posx, int posy, int sizex, int sizey, double r, double g, double b);
 
 	void DrawPhysObject();
 

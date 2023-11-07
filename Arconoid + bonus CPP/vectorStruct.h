@@ -1,7 +1,8 @@
 #pragma once
 
 template <typename T>
-class CustomVec {
+class CustomVec
+{
 public:
 	T x, y;
 };

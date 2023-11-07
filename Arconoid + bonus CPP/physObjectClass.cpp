@@ -2,7 +2,12 @@
 
 #include <glut.h>
 
-
+PhysObject::PhysObject(int posx, int posy, int sizex, int sizey, double r, double g, double b)
+{
+	setPosition(posx, posy);
+	setSize(sizex, sizey);
+	setColor(r, g, b);
+}
 
 void PhysObject::DrawPhysObject()
 {

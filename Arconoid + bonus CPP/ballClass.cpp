@@ -9,28 +9,29 @@ Ball::Ball(double racketPosx, double racketPosy, double racketSizex)
 {
 	setSize(Param::BALL_SIZE_WIDTH, Param::BALL_SIZE_HEIGHT);
 	setPosition(racketPosx + racketSizex / 2 - getSize(0) / 2, racketPosy + getSize(1));
-	launchFlag = 0;
+	isBallLaunch = 0;
 	maxSpeed = Param::SPEED;
 	setVec(0, maxSpeed);
 
-	fireBallFlag = 0;
+	isFireBall = 0;
+	isBarrier = 0;
 
 	setColor(0.0, 0.0, 0.0);
 }
 
 void Ball::BallLaunch(int deltaRacketSpeed)
 {
-	if (!launchFlag)
+	if (!isBallLaunch)
 	{
 		setVec(deltaRacketSpeed - maxSpeed / 10, sqrt(maxSpeed * maxSpeed - getVec(0) * getVec(0)));
-		launchFlag = 1;
+		isBallLaunch = 1;
 	}
 }
 
 
 void Ball::RenderBall(double racketPosx, double racketPosy, double racketSizex)
 {
-	if (launchFlag)
+	if (isBallLaunch)
 	{
 		setPosition(getPosition(0) + getVec(0), getPosition(1) + getVec(1));
 	}
@@ -58,9 +59,13 @@ void Ball::MenuColision(int windSizex, int windSizey)
 		ReleaseFireBall();
 	}
 
-	if (y0 <= 0)
+	if (y0 < 0)
 	{
-		EndGame(0);
+		if (!isBarrier)
+		{
+			EndGame(0);
+		}
+		else ReleaseBarrier();
 	}
 }
 void Ball::RacketColision(int racketPosx, int racketPosy, int racketSizex, int deltaRacketSpeed)
@@ -92,9 +97,9 @@ bool Ball::BlokColision(int blokPosx, int blokPosy, int blokSizex, int blokSizey
 
 	if ((x1 > blokPosx) && (x0 < blokPosx + blokSizex)
 		&& (((y1 < blokPosy) && (y0 > blokPosy) && (y0 > blokPosy - blokSizey))
-		|| ((y1 < blokPosy) && (y1 < blokPosy - blokSizey) && (y0 > blokPosy - blokSizey))))
+			|| ((y1 < blokPosy) && (y1 < blokPosy - blokSizey) && (y0 > blokPosy - blokSizey))))
 	{
-		if (fireBallFlag == 0 || strength == 5)
+		if (isFireBall == 0 || strength == 5)
 		{
 			setVec(getVec(0), (-1) * getVec(1));
 		}
@@ -104,7 +109,7 @@ bool Ball::BlokColision(int blokPosx, int blokPosy, int blokSizex, int blokSizey
 		&& (((x1 > blokPosx) && (x0 < blokPosx) && (x0 < blokPosx + blokSizex))
 			|| ((x1 > blokPosx) && (x1 > blokPosx + blokSizex) && (x0 < blokPosx + blokSizex))))
 	{
-		if (fireBallFlag == 0 || strength == 5)
+		if (isFireBall == 0 || strength == 5)
 		{
 			setVec((-1) * getVec(0), getVec(1));
 		}
@@ -114,16 +119,9 @@ bool Ball::BlokColision(int blokPosx, int blokPosy, int blokSizex, int blokSizey
 	return false;
 }
 
-
-void Ball::FireBallInitialise()
-{
-	fireBallFlag = 1;
-
-	setColor(1, 0.1, 0.1);
-}
 void Ball::ReleaseFireBall()
 {
-	fireBallFlag = 0;
+	isFireBall = 0;
 
 	setColor(0.0, 0.0, 0.0);
 }

@@ -7,29 +7,11 @@
 Bonus::Bonus(int blokPosx, int blokPosy, int blokSizex, int blokSizey)
 {
 	setSize(Param::BONUS_SIZE_WIDTH, Param::BONUS_SIZE_HEIGHT);
-	setPosition(blokPosx + blokSizex / 2 - getSize(0) / 2,
-		blokPosy - blokSizey / 2 + getSize(1) / 2);
-	setType(CHANCE_OF_RANDOM_BONUS);
-
-	if (type == BonusType::FireBall)
-	{
-		setColor(1.0, 0.1, 0.1);
-	}
-	else if (type == BonusType::LittleRacket)
-	{
-		setColor(0.0, 0.5, 1.0);
-	}
-	else if (type == BonusType::BigRacket)
-	{
-		setColor(1.0, 0.5, 0.0);
-	}
-	else if (type == BonusType::NewHp)
-	{
-		setColor(0.0, 0.0, 0.0);
-	}
+	setPosition(blokPosx + blokSizex / 2 - getSize(0) / 2, blokPosy - blokSizey / 2 + getSize(1) / 2);
 
 	setVec(0, (-0.5) * Param::SPEED);
 }
+
 
 int Bonus::RenderBonus(double racketPosx, double racketPosy, double racketSizex)
 {

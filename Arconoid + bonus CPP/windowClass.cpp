@@ -2,21 +2,6 @@
 
 #include <glut.h>
 
-void Window::HpInitialize(int ballSizex, int ballSizey, int windSizey)
-{
-	for (int i = 0; i < hpCount; i++)
-	{
-		hp[i] = Hp(ballSizex, ballSizey, 10 + i * (ballSizex + 5), windSizey - 3);
-	}
-}
-
-void Window::NewHP()
-{
-	if (hpCount < maxHp)
-	{
-		hpCount++;
-	}
-}
 
 Window::Window(int hpCount, int level, int windSizex, int windSizey, int windPosx, int windPosy)
 {
@@ -27,6 +12,14 @@ Window::Window(int hpCount, int level, int windSizex, int windSizey, int windPos
 	score = 0;
 	this->hpCount = hpCount;
 	maxHp = hpCount;
+}
+
+void Window::HpInitialize(int ballSizex, int ballSizey, int windSizey)
+{
+	for (int i = 0; i < hpCount; i++)
+	{
+		hp[i] = Hp(ballSizex, ballSizey, 10 + i * (ballSizex + 5), windSizey - 3);
+	}
 }
 
 void Window::ChooseLevel()
@@ -46,9 +39,7 @@ void Window::CreateLvlOne()
 
 	for (int i = 0; i < blokCount; i++)
 	{
-		auto* new_blok = new Blok(i, getSize(0), getSize(1) - menu.getMenuSize(), 60, 5, 1);// утечка
-		bloks.push_back(*new_blok);
-		delete new_blok;
+		bloks.push_back(Blok(i, getSize(0), getSize(1) - menu.getMenuSize(), 60, 5, 1)); //move или coppy
 	}
 }
 void Window::CreateLvlTwo()
@@ -60,9 +51,7 @@ void Window::CreateLvlTwo()
 
 	for (int i = 0; i < blockCount; i++)
 	{
-		Blok* new_blok = new Blok(i, getSize(0), getSize(1) - menu.getMenuSize(), 15, 10, CHANCE_OF_RANDOM_BLOK);
-		bloks.push_back(*new_blok);
-		delete new_blok;
+		bloks.push_back(Blok(i, getSize(0), getSize(1) - menu.getMenuSize(), 15, 10, CHANCE_OF_RANDOM_BLOK));
 	}
 }
 void Window::BlokDestroy(int i)
@@ -73,9 +62,9 @@ void Window::BlokDestroy(int i)
 	}
 	else
 	{
-		if ((bloks[i].getStrength() == 1 || ball.getFireBallFlag() == 1) && bloks[i].getStrength() != 5)
+		if ((bloks[i].getStrength() == 1 || ball.getIsFireBall() == 1) && bloks[i].getStrength() != 5)
 		{
-			if (CHANCE_OF_RANDOM_BONUS == 1)
+			if (CHANCE_OF_RANDOM_BONUS == 0)
 			{
 				BonusInitialise(i);
 			}
@@ -97,7 +86,7 @@ void Window::BlokDestroy(int i)
 
 void Window::CheckBallColision()
 {
-	if (ball.getLaunchFlag())
+	if (ball.getIsBallLaunch())
 	{
 		ball.MenuColision(getSize(0), getSize(1) - menu.getMenuSize());
 
@@ -105,15 +94,11 @@ void Window::CheckBallColision()
 
 		for (int i = 0; i < bloks.size(); i++)
 		{
-			/*if (bloks[i].getStrength() != 0)
-			{*/
 			if (ball.BlokColision(bloks[i].getPosition(0), bloks[i].getPosition(1), bloks[i].getSize(0), bloks[i].getSize(1), bloks[i].getStrength()))
 			{
 				BlokDestroy(i);
 				break;
-				//}
 			}
-
 		}
 	}
 }
@@ -121,19 +106,37 @@ void Window::CheckBallColision()
 
 void Window::BonusInitialise(int blok_i)
 {
-	Bonus* new_bonus = new Bonus(bloks[blok_i].getPosition(0), bloks[blok_i].getPosition(1), bloks[blok_i].getSize(0), bloks[blok_i].getSize(1));
+	switch (CHANCE_OF_RANDOM_BONUS)
+	{
+	case 0:
+		bonuses.push_back(new Barrier(bloks[blok_i].getPosition(0), bloks[blok_i].getPosition(1), bloks[blok_i].getSize(0), bloks[blok_i].getSize(1)));
 
-	bonus.push_back(*new_bonus);
+		break;
+	case 1:
+		bonuses.push_back(new FireBall(bloks[blok_i].getPosition(0), bloks[blok_i].getPosition(1), bloks[blok_i].getSize(0), bloks[blok_i].getSize(1)));
 
-	delete new_bonus;
+		break;
+	case 2:
+		bonuses.push_back(new LittleRacket(bloks[blok_i].getPosition(0), bloks[blok_i].getPosition(1), bloks[blok_i].getSize(0), bloks[blok_i].getSize(1)));
+
+		break;
+	case 3:
+		bonuses.push_back(new BigRacket(bloks[blok_i].getPosition(0), bloks[blok_i].getPosition(1), bloks[blok_i].getSize(0), bloks[blok_i].getSize(1)));
+
+		break;
+	case 4:
+		bonuses.push_back(new NewHp(bloks[blok_i].getPosition(0), bloks[blok_i].getPosition(1), bloks[blok_i].getSize(0), bloks[blok_i].getSize(1)));
+
+		break;
+	}
 }
 void Window::RenderBonuses()
 {
 	int j = 0;
 
-	for (int i = 0; i < bonus.size(); i++)
+	for (int i = 0; i < bonuses.size(); i++)
 	{
-		j = bonus[i].RenderBonus(racket.getPosition(0), racket.getPosition(1), racket.getSize(0));
+		j = bonuses[i]->RenderBonus(racket.getPosition(0), racket.getPosition(1), racket.getSize(0));
 		if (j == 1)
 		{
 			BonusDestroy(i);
@@ -144,39 +147,21 @@ void Window::RenderBonuses()
 		}
 	}
 }
-void Window::BonusRelease()
-{
-	bonus.clear();
-}
 void Window::BonusCatch(int bonus_i)
 {
 	score += 100;
 
-	if (bonus[bonus_i].getType() == 1)
-	{
-		ball.FireBallInitialise();
-	}
-	else if (bonus[bonus_i].getType() == 2)
-	{
-		racket.LittleRacketInitialise();
-	}
-	else if (bonus[bonus_i].getType() == 3)
-	{
-		racket.BigRacketInitialise();
-	}
-	else if (bonus[bonus_i].getType() == 4)
-	{
-		NewHP();
-	}
+	bonuses[bonus_i]->BonusInitialize(racket, ball, hpCount, maxHp);
 
 	BonusDestroy(bonus_i);
 }
 void Window::BonusDestroy(int bonus_i)
 {
-	bonus[bonus_i] = bonus[bonus.size() - 1];
+	bonuses[bonus_i] = bonuses[bonuses.size() - 1];
 
-	bonus.pop_back();
+	bonuses.pop_back();
 }
+
 void Window::DrawHp()
 {
 	for (int i = 0; i < hpCount; i++)
@@ -196,8 +181,8 @@ void Window::DrawBloks()
 }
 void Window::DrawBonuses()
 {
-	for (int i = 0; i < bonus.size(); i++)
+	for (int i = 0; i < bonuses.size(); i++)
 	{
-		bonus[i].DrawPhysObject();
+		bonuses[i]->DrawPhysObject();
 	}
 }

@@ -35,20 +35,6 @@ void Racket::RenderRacket(int x, int y, int windSizex)
 	}
 }
 
-void Racket::LittleRacketInitialise()
-{
-	setSize(getSize(0) / 2, getSize(1));
-
-	setColor(0.0, 0.0, 1.0);
-}
-void Racket::BigRacketInitialise()
-{
-	setSize(getSize(0) * 1.4, getSize(1));
-
-	setColor(1.0, 0.0, 0.0);
-}
-
-
 int Racket::getRacketSpeed(int i)
 {
 	if (i == 0)	return racketSpeed.x;

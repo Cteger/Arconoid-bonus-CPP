@@ -8,7 +8,7 @@ struct Ball : public PhysObject, public Vector
 private:
 	bool isBallLaunch;
 	double maxSpeed;
-	bool isFireBall; //is fireball
+	bool isFireBall;
 	bool isBarrier;
 
 public:

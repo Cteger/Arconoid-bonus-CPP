@@ -22,15 +22,10 @@ enum Param
 	HP_COUNT = 3
 };
 
-class Game
-{
-
-};
-
 void SystemOpen(int argc, char** argv);
 void SystemRelease();
 void GameInitialize(int level);
-void GameUpdate(int hpCount, int next_level_flag, int level);
+void GameUpdate(int hpCount, bool isNextLevel, int level);
 void SystemUpdate();
 
 void RenderScene();

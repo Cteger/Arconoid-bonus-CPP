@@ -20,8 +20,6 @@ public:
 	int RenderBonus(double racketPosx, double racketPosy, double racketSizex);
 
 	int CheckBonus(double racketPosx, double racketPosy, double racketSizex);
-
-	int getType() { return type; };
 };
 
 class Barrier : public Bonus
@@ -88,7 +86,7 @@ public:
 
 	void BonusInitialize(Racket& racket, Ball& ball, int& hpCount, int maxHp) override
 	{
-		racket.setSize((racket.getSize(0) * 2), racket.getSize(1));
+		racket.setSize((racket.getSize(0) * 1.2), racket.getSize(1));
 
 		racket.setColor(1.0, 0.0, 0.0);
 	}

@@ -1,3 +1,7 @@
+#define CHANCE_OF_RANDOM_BLOK (rand() % 5 + 1)
+#define CHANCE_OF_RANDOM_BONUS (rand() % 5)
+
+
 #include "windowClass.h"
 
 #include <glut.h>
@@ -18,7 +22,7 @@ void Window::HpInitialize(int ballSizex, int ballSizey, int windSizey)
 {
 	for (int i = 0; i < hpCount; i++)
 	{
-		hp[i] = Hp(ballSizex, ballSizey, 10 + i * (ballSizex + 5), windSizey - 3);
+		hp[i] = Hp(10 + i * (ballSizex + 5), windSizey - 3, ballSizex, ballSizey);
 	}
 }
 
@@ -39,7 +43,7 @@ void Window::CreateLvlOne()
 
 	for (int i = 0; i < blokCount; i++)
 	{
-		bloks.push_back(Blok(i, getSize(0), getSize(1) - menu.getMenuSize(), 60, 5, 1)); //move или coppy
+		bloks.push_back(Blok(i, getSize(0), getSize(1) - menu.getMenuSize(), 60, 5, 1));
 	}
 }
 void Window::CreateLvlTwo()
@@ -64,7 +68,7 @@ void Window::BlokDestroy(int i)
 	{
 		if ((bloks[i].getStrength() == 1 || ball.getIsFireBall() == 1) && bloks[i].getStrength() != 5)
 		{
-			if (CHANCE_OF_RANDOM_BONUS == 0)
+			if (true)//CHANCE_OF_RANDOM_BONUS == 0)
 			{
 				BonusInitialise(i);
 			}
@@ -147,6 +151,15 @@ void Window::RenderBonuses()
 		}
 	}
 }
+void Window::BonusRelease()
+{
+	for (int i = 0; i < bonuses.size(); i++)
+	{
+		delete bonuses[i];
+	}
+
+	bonuses.clear();
+}
 void Window::BonusCatch(int bonus_i)
 {
 	score += 100;
@@ -157,9 +170,8 @@ void Window::BonusCatch(int bonus_i)
 }
 void Window::BonusDestroy(int bonus_i)
 {
-	bonuses[bonus_i] = bonuses[bonuses.size() - 1];
-
-	bonuses.pop_back();
+	delete bonuses[bonus_i];
+	bonuses.erase(bonuses.begin() + bonus_i);
 }
 
 void Window::DrawHp()

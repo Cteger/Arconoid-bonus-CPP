@@ -18,7 +18,7 @@ public:
 		vect.x = x;
 		vect.y = y;
 	}
-	
+
 	double getVec(int i)
 	{
 		if (i == 0)	return vect.x;

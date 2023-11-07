@@ -65,7 +65,11 @@ void Ball::MenuColision(int windSizex, int windSizey)
 		{
 			EndGame(0);
 		}
-		else ReleaseBarrier();
+		else
+		{
+			setVec(getVec(0), (-1) * getVec(1));
+			ReleaseBarrier();
+		}
 	}
 }
 void Ball::RacketColision(int racketPosx, int racketPosy, int racketSizex, int deltaRacketSpeed)

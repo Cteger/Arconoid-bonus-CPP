@@ -22,7 +22,7 @@ void GameInitialize(int level)
 {
 	wind = Window(HP_COUNT, level, WINDOW_SIZEX, WINDOW_SIZEY, WINDOW_POSITIONX, WINDOW_POSITIONY);
 
-	wind.menu = Menu(wind.getSize(0), MENU_SIZE, wind.getSize(1) - 1);
+	wind.menu = Menu(wind.getSize(1) - 1, wind.getSize(0), MENU_SIZE);
 
 	wind.racket = Racket(wind.getSize(0));
 
@@ -35,7 +35,7 @@ void GameInitialize(int level)
 	SystemUpdate();
 }
 
-void GameUpdate(int hpCount, int next_level_flag, int level)
+void GameUpdate(int hpCount, bool isNextLevel, int level)
 {
 	wind.setLevel(level);
 	wind.setHpCount(hpCount);
@@ -44,7 +44,7 @@ void GameUpdate(int hpCount, int next_level_flag, int level)
 
 	wind.ball = Ball(wind.racket.getPosition(0), wind.racket.getPosition(1), wind.racket.getSize(0));
 
-	if (next_level_flag == 0)
+	if (!isNextLevel)
 	{
 		wind.ChooseLevel();
 	}

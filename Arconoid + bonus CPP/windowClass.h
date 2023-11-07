@@ -42,7 +42,7 @@ public:
 
 	void BonusInitialise(int blok_i);
 	void RenderBonuses();
-	void BonusRelease() { bonuses.clear(); };
+	void BonusRelease();
 	void BonusCatch(int bonus_i);
 	void BonusDestroy(int bonus_i);
 

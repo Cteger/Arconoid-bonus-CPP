@@ -132,6 +132,9 @@ void Window::BonusInitialise(int blok_i)
 		bonuses.push_back(new NewHp(bloks[blok_i].getPosition(0), bloks[blok_i].getPosition(1), bloks[blok_i].getSize(0), bloks[blok_i].getSize(1)));
 
 		break;
+	case 5:
+		bonuses.push_back(new ChangeTr(bloks[blok_i].getPosition(0), bloks[blok_i].getPosition(1), bloks[blok_i].getSize(0), bloks[blok_i].getSize(1)));
+		break;
 	}
 }
 void Window::RenderBonuses()

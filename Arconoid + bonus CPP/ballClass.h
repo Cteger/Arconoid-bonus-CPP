@@ -3,9 +3,11 @@
 #include "vectorStruct.h"
 #include "physObjectClass.h"
 
-struct Ball : public PhysObject, public Vector
+class Ball : public PhysObject
 {
 private:
+	Vector vect;
+
 	bool isBallLaunch;
 	double maxSpeed;
 	bool isFireBall;
@@ -32,4 +34,7 @@ public:
 
 	int getIsBallLaunch() { return isBallLaunch; }
 	int getIsFireBall() { return isFireBall; }
+
+	void setVectorx(int i) { vect.setVec(i, vect.getVec(1)); }
+	int getVectorx() { return vect.getVec(0); }
 };

@@ -3,7 +3,17 @@
 
 #include "physObjectClass.h"
 
-struct Blok : public PhysObject
+enum Strength
+{
+	White,
+	Green,
+	Yellow,
+	Blue,
+	Pink,
+	Gray
+};
+
+class Blok : public PhysObject
 {
 private:
 	int strength;
@@ -16,14 +26,4 @@ public:
 
 	void setStrength(int strength) { this->strength = strength; };
 	int getStrength() { return strength; };
-};
-
-enum Strength
-{
-	White,
-	Green,
-	Yellow,
-	Blue,
-	Pink,
-	Gray
 };

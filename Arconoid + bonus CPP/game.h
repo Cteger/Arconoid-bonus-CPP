@@ -1,7 +1,7 @@
 #pragma once
 
 #define CHANCE_OF_RANDOM_BLOK (rand() % 5 + 1)
-#define CHANCE_OF_RANDOM_BONUS (rand() % 5)
+#define CHANCE_OF_RANDOM_BONUS (rand() % 6)
 
 enum Param
 {

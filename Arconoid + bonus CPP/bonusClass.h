@@ -1,14 +1,15 @@
 #pragma once
+#include "vectorStruct.h"
 #include "game.h"
 #include "racketClass.h"
 #include "ballClass.h"
 #include "vectorStruct.h"
 #include "physObjectClass.h"
 
-class Bonus : public PhysObject, public Vector
+class Bonus : public PhysObject
 {
 private:
-	int type;
+	Vector vect;
 
 public:
 	Bonus() {};
@@ -31,6 +32,11 @@ public:
 		setColor(0.0, 1.0, 0.0);
 	}
 	~Barrier() {};
+
+	Barrier(Barrier&& move) : Bonus(std::move(move))
+	{
+
+	}
 
 	void BonusInitialize(Racket& racket, Ball& ball, int& hpCount, int maxHp) override
 	{
@@ -110,5 +116,23 @@ public:
 		{
 			hpCount = hpCount + 1;
 		}
+	}
+};
+
+class ChangeTr : public Bonus
+{
+private:
+
+public:
+	ChangeTr() {}
+	ChangeTr(int blokPosx, int blokPosy, int blokSizex, int blokSizey) : Bonus(blokPosx, blokPosy, blokSizex, blokSizey)
+	{
+		setColor(0.2, 0.2, 0.2);
+	}
+	~ChangeTr() {}
+
+	void BonusInitialize(Racket& racket, Ball& ball, int& hpCount, int maxHp) override
+	{
+		ball.setVectorx(ball.getVectorx() + rand() % 3);
 	}
 };
